@@ -1,0 +1,14 @@
+.container {
+	background-color: darkseagreen;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+	box-sizing: border-box;
+}
+
+@media (min-width: 1024px) {
+	.content-layout {
+		padding: 3rem 2rem;
+	}
+}
