@@ -3,6 +3,7 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import * as React from "react";
 import { Head } from "@/components/head/head";
+import { Header } from "@/components/layouts/header/header";
 
 interface RouterContext {
 	queryClient: QueryClient;
@@ -17,10 +18,7 @@ function RootComponent() {
 	return (
 		<React.Fragment>
 			<Head description="Epilog" />
-
-			<header>
-				<h1>Epilog</h1>
-			</header>
+			<Header />
 
 			<main>
 				<Outlet />
