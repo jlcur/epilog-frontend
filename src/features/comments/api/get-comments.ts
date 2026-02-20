@@ -3,9 +3,10 @@ import { endpoints } from "@/config/endpoints";
 import { queryKey } from "@/config/query-key";
 import { api } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
+import type { Comment } from "@/types/api";
 
-export const getComments = () => {
-	return api.get(`${endpoints.comments.all}`);
+export const getComments = (): Promise<Comment[]> => {
+	return api.get(endpoints.comments.all);
 };
 
 export const getCommentsQueryOptions = () => {
