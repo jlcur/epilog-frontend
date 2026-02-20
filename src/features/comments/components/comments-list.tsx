@@ -1,17 +1,22 @@
+import { CommentCard } from "@/features/comments/components/comment-card";
+import type { Comment } from "@/types/api";
 import { useComments } from "../api/get-comments.ts";
-import styles from "./comments-list.module.css";
 
 export const CommentsList = () => {
-	const commentsQuery = useComments();
+	const { data: comments = [], isPending } = useComments();
 
-	const comments = commentsQuery.data?.data;
+	if (isPending) return <div>Loading...</div>;
 
-	if (!comments) return null;
+	if (comments.length === 0) {
+		return <div>No comments found.</div>;
+	}
 
 	return (
-		<ul className={styles["comment-list"]}>
-			{comments.map((comment: any) => (
-				<li key={comment.id}>{comment.content}</li>
+		<ul>
+			{comments.map((comment: Comment) => (
+				<li key={comment.id}>
+					<CommentCard comment={comment} />
+				</li>
 			))}
 		</ul>
 	);
