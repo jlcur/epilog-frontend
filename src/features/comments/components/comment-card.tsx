@@ -1,3 +1,4 @@
+import { Link } from "lucide-react";
 import type { Comment } from "@/types/api";
 import { convertDateToDistance } from "@/utils/date-utils/format-date";
 import styles from "./comment-card.module.css";
@@ -13,6 +14,9 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 		<div className={styles.comment}>
 			<div className={styles.meta}>
 				<span>{timeSinceCommentPosted}</span>
+				<span>
+					<Link size={16} />
+				</span>
 			</div>
 			<p className={styles.content}>{comment.content}</p>
 		</div>
