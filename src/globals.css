@@ -4,18 +4,82 @@
 	/* ======================================== */
 
 	/* Colours */
-	--color-blue-700: #3b82f6;
-	--color-blue-800: #3377e8;
-	--color-red-700: #ef4444;
+	--color-neutral-0: #fefefe;
+	--color-neutral-50: #fafafa;
+	--color-neutral-100: #f4f4f4;
+	--color-neutral-200: #e3e3e3;
+	--color-neutral-300: #cccccc;
+	--color-neutral-400: #a6a6a6;
+	--color-neutral-500: #818181;
+	--color-neutral-600: #636363;
+	--color-neutral-700: #4b4b4b;
+	--color-neutral-800: #353535;
+	--color-neutral-900: #191919;
+	--color-neutral-950: #070707;
+	--color-neutral-1000: #000000;
 
-	--color-neutral-100: #f3f3f3;
+	--color-green-0: #ffffff;
+	--color-green-50: #eefff3;
+	--color-green-100: #a5ffcc;
+	--color-green-200: #83f2b2;
+	--color-green-300: #50d891;
+	--color-green-400: #45b077;
+	--color-green-500: #3a895e;
+	--color-green-600: #306949;
+	--color-green-700: #275038;
+	--color-green-800: #153925;
+	--color-green-900: #001f0a;
+	--color-green-950: #000b03;
+	--color-green-1000: #000000;
+
+	--color-blue-0: #fbfeff;
+	--color-blue-50: #f4fbff;
+	--color-blue-100: #c7faff;
+	--color-blue-200: #aeeaff;
+	--color-blue-300: #8cd4fc;
+	--color-blue-400: #47aede;
+	--color-blue-500: #3888ad;
+	--color-blue-600: #2c6885;
+	--color-blue-700: #224f66;
+	--color-blue-800: #183848;
+	--color-blue-900: #001c28;
+	--color-blue-950: #000910;
+	--color-blue-1000: #000001;
+
+	--color-orange-0: #fffdfb;
+	--color-orange-50: #fff8f3;
+	--color-orange-100: #ffeccb;
+	--color-orange-200: #ffd8b1;
+	--color-orange-300: #f3be8f;
+	--color-orange-400: #d19155;
+	--color-orange-500: #ac6719;
+	--color-orange-600: #874f0e;
+	--color-orange-700: #693b05;
+	--color-orange-800: #4d2900;
+	--color-orange-900: #2d1100;
+	--color-orange-950: #100500;
+	--color-orange-1000: #000000;
+
+	--color-red-0: #fffdfc;
+	--color-red-50: #fff8f7;
+	--color-red-100: #ffebe1;
+	--color-red-200: #ffd6c8;
+	--color-red-300: #ffb9a6;
+	--color-red-400: #ff836b;
+	--color-red-500: #f04f3c;
+	--color-red-600: #d80113;
+	--color-red-700: #a90008;
+	--color-red-800: #7d0000;
+	--color-red-900: #450000;
+	--color-red-950: #180000;
+	--color-red-1000: #010000;
 
 	/* Spacing */
 	--spacing-1: 1px;
 	--spacing-2: 2px;
 	--spacing-3: 4px;
 	--spacing-4: 8px;
-	--spacing-5: 12x;
+	--spacing-5: 12px;
 	--spacing-6: 16px;
 	--spacing-7: 20px;
 	--spacing-8: 24px;
@@ -35,7 +99,16 @@
 	--size-full: 9999px;
 
 	/* Typography */
-	--font-sans: "Inter", system-ui, sans-serif;
+	--font-sans: Courier New, Courier, monospace;
+	--font-size-xxxlarge: 2rem;
+	--font-size-xxlarge: 1.75rem;
+	--font-size-xlarge: 1.5rem;
+	--font-size-large: 1.25rem;
+	--font-size-medium: 1rem;
+	--font-size-small: 0.875rem;
+	--font-size-xsmall: 0.75rem;
+	--font-size-xxsmall: 0.5rem;
+	--font-size-xxxsmall: 0.25rem;
 
 	/* Elevation */
 	--shadow-1: rgba(0, 0, 0, 0.16) 0 1px 4px;
@@ -43,8 +116,8 @@
 	/* ============================================= */
 	/*       Semantic tokens: contextual usage       */
 	/* ============================================= */
-	--color-text: var();
-	--color-text-subltle: var();
+	--color-text: var(--color-neutral-1000);
+	--color-text-subltle: var(--color-neutral-600);
 	--color-text-subtlest: var();
 	--color-text-primary: var();
 	--color-text-primary-bolder: var();
@@ -68,15 +141,15 @@
 	--color-icon-disabled: var();
 	--color-icon-danger: var();
 
-	--color-border: var();
+	--color-border: var(--color-neutral-300);
 	--color-border-disabled: var();
 	--color-border-focused: var();
 	--color-border-input: var();
 	--color-border-danger: var();
 
 	--color-background: var(--color-neutral-100);
-	--color-background-primary: var(--color-blue-700);
-	--color-background-primary-hover: var(--color-blue-800);
+	--color-background-primary: var(--color-blue-500);
+	--color-background-primary-hover: var(--color-blue-600);
 	--color-background-primary-pressed: var();
 	--color-background-secondary: var();
 	--color-background-secondary-hover: var();
@@ -90,8 +163,8 @@
 	--color-background-warning: var();
 	--color-background-warning-hover: var();
 	--color-background-warning-pressed: var();
-	--color-background-danger: var(--color-border-danger);
-	--color-background-danger-hover: var();
+	--color-background-danger: var(--color-red-600);
+	--color-background-danger-hover: var(--color-red-700);
 	--color-background-danger-pressed: var();
 	--color-background-input: var();
 	--color-background-input-hover: var();
@@ -99,17 +172,18 @@
 	--color-background-outline-hover: var();
 	--color-background-ghost: var();
 	--color-background-ghost-hover: var();
+	--color-background-container: var(--color-neutral-50);
 
-	--font-body-large: var();
-	--font-body: var();
-	--font-body-small: var();
-	--font-heading-xxlarge: var();
-	--font-heading-xlarge: var();
-	--font-heading-large: var();
-	--font-heading-medium: var();
-	--font-heading-small: var();
-	--font-heading-xsmall: var();
-	--font-heading-xxsmall: var();
+	--font-body-large: var(--font-size-medium);
+	--font-body: var(--font-size-small);
+	--font-body-small: var(--font-size-xsmall);
+	--font-heading-xxlarge: var(--font-size-xxxlarge);
+	--font-heading-xlarge: var(--font-size-xxlarge);
+	--font-heading-large: var(--font-size-xlarge);
+	--font-heading-medium: var(--font-size-large);
+	--font-heading-small: var(--font-size-medium);
+	--font-heading-xsmall: var(--font-size-small);
+	--font-heading-xxsmall: var(--font-size-xsmall);
 	--font-family-heading: var();
 	--font-family-body: var();
 
