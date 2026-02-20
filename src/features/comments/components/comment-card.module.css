@@ -1,0 +1,20 @@
+.comment {
+	margin: 1em 0;
+	background-color: var(--color-background-container);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-small);
+	padding: var(--spacing-3) var(--spacing-5);
+
+	> .content {
+		font-size: var(--font-body);
+		margin-top: var(--spacing-5);
+	}
+
+	> .meta {
+		display: flex;
+		font-size: var(--font-body-small);
+		color: var(--color-text-subltle);
+		padding: var(--spacing-3) 0;
+		border-bottom: 1px solid var(--color-border);
+	}
+}
