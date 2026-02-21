@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import * as React from "react";
+import { ThemeProvider } from "@/app/theme-provider";
 import { queryConfig } from "@/lib/react-query";
 
 type AppProviderProps = {
@@ -17,8 +18,10 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			{import.meta.env.DEV && <ReactQueryDevtools />}
-			{children}
+			<ThemeProvider>
+				{import.meta.env.DEV && <ReactQueryDevtools />}
+				{children}
+			</ThemeProvider>
 		</QueryClientProvider>
 	);
 };
