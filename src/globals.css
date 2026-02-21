@@ -116,6 +116,38 @@
 	/* ============================================= */
 	/*       Semantic tokens: contextual usage       */
 	/* ============================================= */
+	--font-body-large: var(--font-size-medium);
+	--font-body: var(--font-size-small);
+	--font-body-small: var(--font-size-xsmall);
+	--font-heading-xxlarge: var(--font-size-xxxlarge);
+	--font-heading-xlarge: var(--font-size-xxlarge);
+	--font-heading-large: var(--font-size-xlarge);
+	--font-heading-medium: var(--font-size-large);
+	--font-heading-small: var(--font-size-medium);
+	--font-heading-xsmall: var(--font-size-small);
+	--font-heading-xxsmall: var(--font-size-xsmall);
+	--font-family-heading: var();
+	--font-family-body: var();
+
+	--border-width: var(--size-xxsmall);
+	--border-width-selected: var(--size-xsmall);
+	--border-width-focused: var(--size-xsmall);
+
+	--radius-xsmall: var(--size-xsmall);
+	--radius-small: var(--size-small);
+	--radius-medium: var(--size-medium);
+	--radius-large: var(--size-large);
+	--radius-xlarge: var(--size-xlarge);
+	--radius-xxlarge: var(--size-xxlarge);
+	--radius-full: var(--size-full);
+
+	--shadow: var(--shadow-1);
+
+	--opacity-disabled: var();
+	--opacity-loading: var();
+}
+
+[data-theme="light"] {
 	--color-text: var(--color-neutral-1000);
 	--color-text-subltle: var(--color-neutral-600);
 	--color-text-subtlest: var();
@@ -173,36 +205,66 @@
 	--color-background-ghost: var();
 	--color-background-ghost-hover: var();
 	--color-background-container: var(--color-neutral-50);
+}
 
-	--font-body-large: var(--font-size-medium);
-	--font-body: var(--font-size-small);
-	--font-body-small: var(--font-size-xsmall);
-	--font-heading-xxlarge: var(--font-size-xxxlarge);
-	--font-heading-xlarge: var(--font-size-xxlarge);
-	--font-heading-large: var(--font-size-xlarge);
-	--font-heading-medium: var(--font-size-large);
-	--font-heading-small: var(--font-size-medium);
-	--font-heading-xsmall: var(--font-size-small);
-	--font-heading-xxsmall: var(--font-size-xsmall);
-	--font-family-heading: var();
-	--font-family-body: var();
+[data-theme="dark"] {
+	--color-text: var(--color-neutral-0);
+	--color-text-subltle: var();
+	--color-text-subtlest: var();
+	--color-text-primary: var();
+	--color-text-primary-bolder: var();
+	--color-text-success: var();
+	--color-text-success-bolder: var();
+	--color-text-information: var();
+	--color-text-information-bolder: var();
+	--color-text-warning: var();
+	--color-text-warning-bolder: var();
+	--color-text-danger: var();
+	--color-text-danger-bolder: var();
+	--color-text-disabled: var();
 
-	--border-width: var(--size-xxsmall);
-	--border-width-selected: var(--size-xsmall);
-	--border-width-focused: var(--size-xsmall);
+	--color-link: var();
+	--color-link-pressed: var();
+	--color-link-visited: var();
+	--color-link-visited-pressed: var();
 
-	--radius-xsmall: var(--size-xsmall);
-	--radius-small: var(--size-small);
-	--radius-medium: var(--size-medium);
-	--radius-large: var(--size-large);
-	--radius-xlarge: var(--size-xlarge);
-	--radius-xxlarge: var(--size-xxlarge);
-	--radius-full: var(--size-full);
+	--color-icon: var();
+	--color-icon-primary: var();
+	--color-icon-disabled: var();
+	--color-icon-danger: var();
 
-	--shadow: var(--shadow-1);
+	--color-border: var(--color-neutral-700);
+	--color-border-disabled: var();
+	--color-border-focused: var();
+	--color-border-input: var();
+	--color-border-danger: var();
 
-	--opacity-disabled: var();
-	--opacity-loading: var();
+	--color-background: var(--color-neutral-950);
+	--color-background-primary: var(--color-blue-500);
+	--color-background-primary-hover: var(--color-blue-600);
+	--color-background-primary-pressed: var();
+	--color-background-secondary: var();
+	--color-background-secondary-hover: var();
+	--color-background-secondary-pressed: var();
+	--color-background-success: var();
+	--color-background-success-hover: var();
+	--color-background-success-pressed: var();
+	--color-background-information: var();
+	--color-background-information-hover: var();
+	--color-background-information-pressed: var();
+	--color-background-warning: var();
+	--color-background-warning-hover: var();
+	--color-background-warning-pressed: var();
+	--color-background-danger: var(--color-red-600);
+	--color-background-danger-hover: var(--color-red-700);
+	--color-background-danger-pressed: var();
+	--color-background-input: var();
+	--color-background-input-hover: var();
+	--color-background-outline: var();
+	--color-background-outline-hover: var();
+	--color-background-ghost: var();
+	--color-background-ghost-hover: var();
+	--color-background-container: var(--color-neutral-900);
 }
 
 body {
