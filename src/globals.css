@@ -209,7 +209,7 @@
 
 [data-theme="dark"] {
 	--color-text: var(--color-neutral-0);
-	--color-text-subltle: var();
+	--color-text-subltle: var(--color-neutral-500);
 	--color-text-subtlest: var();
 	--color-text-primary: var();
 	--color-text-primary-bolder: var();
