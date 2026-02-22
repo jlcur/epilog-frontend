@@ -14,7 +14,7 @@ export const CreateComment = () => {
 		},
 	});
 
-	function getCommentContent(e: any) {
+	function postComment(e: any) {
 		e.preventDefault();
 
 		const form = e.target;
@@ -29,7 +29,7 @@ export const CreateComment = () => {
 	}
 
 	return (
-		<form method="post" onSubmit={getCommentContent} className={styles.form}>
+		<form method="post" onSubmit={postComment} className={styles.form}>
 			<label>
 				Add your comment
 				<textarea name="content" />
