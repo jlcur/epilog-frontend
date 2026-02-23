@@ -26,6 +26,8 @@ export const CreateComment = () => {
 				content: commentContent,
 			},
 		});
+
+		form.reset();
 	}
 
 	return (
