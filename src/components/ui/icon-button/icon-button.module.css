@@ -1,0 +1,33 @@
+.container {
+	all: unset;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	transition:
+		background 0.2s ease,
+		color 0.2s ease;
+	cursor: pointer;
+}
+
+.sizeS {
+	width: 14px;
+	height: 14px;
+}
+
+.sizeM {
+	width: 24px;
+	height: 24px;
+}
+
+.sizeL {
+	width: 32px;
+	height: 32px;
+}
+
+.normal {
+	background: transparent;
+}
+
+.danger {
+	color: var(--color-icon-danger);
+}
