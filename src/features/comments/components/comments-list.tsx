@@ -1,4 +1,5 @@
 import { CommentCard } from "@/features/comments/components/comment-card";
+import { CreateComment } from "@/features/comments/components/create-comment";
 import type { Comment } from "@/types/api";
 import { useComments } from "../api/get-comments.ts";
 
@@ -12,12 +13,15 @@ export const CommentsList = () => {
 	}
 
 	return (
-		<ul>
-			{comments.map((comment: Comment) => (
-				<li key={comment.id}>
-					<CommentCard comment={comment} />
-				</li>
-			))}
-		</ul>
+		<div>
+			<CreateComment />
+			<ul>
+				{comments.map((comment: Comment) => (
+					<li key={comment.id}>
+						<CommentCard comment={comment} />
+					</li>
+				))}
+			</ul>
+		</div>
 	);
 };
