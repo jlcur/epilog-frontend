@@ -183,8 +183,8 @@
 	--color-background-primary: var(--color-blue-500);
 	--color-background-primary-hover: var(--color-blue-600);
 	--color-background-primary-pressed: var();
-	--color-background-secondary: var();
-	--color-background-secondary-hover: var();
+	--color-background-secondary: var(--color-neutral-100);
+	--color-background-secondary-hover: var(--color-neutral-200);
 	--color-background-secondary-pressed: var();
 	--color-background-success: var();
 	--color-background-success-hover: var();
@@ -243,8 +243,8 @@
 	--color-background-primary: var(--color-blue-500);
 	--color-background-primary-hover: var(--color-blue-600);
 	--color-background-primary-pressed: var();
-	--color-background-secondary: var();
-	--color-background-secondary-hover: var();
+	--color-background-secondary: var(--color-neutral-900);
+	--color-background-secondary-hover: var(--color-neutral-950);
 	--color-background-secondary-pressed: var();
 	--color-background-success: var();
 	--color-background-success-hover: var();

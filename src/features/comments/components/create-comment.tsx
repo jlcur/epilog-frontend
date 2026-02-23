@@ -38,7 +38,7 @@ export const CreateComment = () => {
 			</label>
 
 			<div>
-				<Button type="submit" variant="outline">
+				<Button type="submit" variant="secondary">
 					Post comment
 				</Button>
 			</div>

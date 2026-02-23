@@ -31,6 +31,15 @@
 		}
 	}
 
+	&.-secondary {
+		background-color: var(--color-background-secondary);
+		border: 1px solid var(--color-border);
+
+		&:hover {
+			background-color: var(--color-background-secondary-hover);
+		}
+	}
+
 	&.-danger {
 		background-color: var(--button-color-background-danger);
 
