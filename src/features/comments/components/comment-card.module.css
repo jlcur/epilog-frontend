@@ -19,5 +19,10 @@
 		gap: 1em;
 		align-items: center;
 		justify-content: space-between;
+
+		> .actions {
+			display: flex;
+			gap: var(--spacing-4);
+		}
 	}
 }
