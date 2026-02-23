@@ -3,5 +3,6 @@ export const endpoints = {
 		all: "comment",
 		getById: (commentId: string) => `comment/${commentId}`,
 		delete: (commentId: string) => `comment/${commentId}`,
+		create: "comment",
 	},
 };
