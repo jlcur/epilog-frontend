@@ -173,7 +173,7 @@
 	--color-text-information-bolder: var();
 	--color-text-warning: var();
 	--color-text-warning-bolder: var();
-	--color-text-danger: var();
+	--color-text-danger: var(--color-red-500);
 	--color-text-danger-bolder: var();
 	--color-text-disabled: var();
 
@@ -233,7 +233,7 @@
 	--color-text-information-bolder: var();
 	--color-text-warning: var();
 	--color-text-warning-bolder: var();
-	--color-text-danger: var();
+	--color-text-danger: var(--color-red-500);
 	--color-text-danger-bolder: var();
 	--color-text-disabled: var();
 
