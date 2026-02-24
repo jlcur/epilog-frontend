@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/correctness/noChildrenProp: TanStack Form uses children prop to render fields */
+import { useForm } from "@tanstack/react-form";
 import { Button } from "@/components/ui/button/button";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
 import { useCreateComment } from "@/features/comments/api/create-comment";
@@ -14,34 +16,79 @@ export const CreateComment = () => {
 		},
 	});
 
-	function postComment(e: any) {
-		e.preventDefault();
+	const form = useForm({
+		defaultValues: {
+			content: "",
+		},
+		onSubmit: async ({ value }) => {
+			createCommentMutation.mutate({
+				data: {
+					content: value.content,
+				},
+			});
 
-		const form = e.target;
-		const formData = new FormData(form);
-		const commentContent = (formData.get("content") as string | null) || "";
-
-		createCommentMutation.mutate({
-			data: {
-				content: commentContent,
-			},
-		});
-
-		form.reset();
-	}
+			form.reset();
+		},
+	});
 
 	return (
-		<form method="post" onSubmit={postComment} className={styles.form}>
-			<label>
-				Add your comment
-				<textarea name="content" />
-			</label>
-
-			<div>
-				<Button type="submit">
-					{createCommentMutation.isPending ? "Posting..." : "Post comment"}
-				</Button>
-			</div>
-		</form>
+		<div>
+			<h1>Comment form</h1>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					e.stopPropagation();
+					form.handleSubmit();
+				}}
+				className={styles.form}
+			>
+				<div>
+					<form.Field
+						name="content"
+						validators={{
+							onChangeAsyncDebounceMs: 500,
+							onChangeAsync: ({ value }) => {
+								if (!value) {
+									return "Comment content is required";
+								}
+							},
+						}}
+						children={(field) => {
+							return (
+								<>
+									<label htmlFor={field.name}>Post content:</label>
+									<textarea
+										id={field.name}
+										name={field.name}
+										value={field.state.value}
+										onBlur={field.handleBlur}
+										onChange={(e) => field.handleChange(e.target.value)}
+									/>
+									{field.state.meta.errors && (
+										<div className={styles.error}>
+											{field.state.meta.errors.join(",")}
+										</div>
+									)}
+								</>
+							);
+						}}
+					/>
+				</div>
+				<form.Subscribe
+					selector={(state) => [state.canSubmit, state.isSubmitting]}
+					children={([canSubmit, isSubmitting]) => (
+						<div>
+							<Button
+								type="submit"
+								disabled={!canSubmit}
+								onClick={form.handleSubmit}
+							>
+								{isSubmitting ? "Posting..." : "Post comment"}
+							</Button>
+						</div>
+					)}
+				/>
+			</form>
+		</div>
 	);
 };

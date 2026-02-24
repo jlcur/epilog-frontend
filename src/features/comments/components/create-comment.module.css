@@ -1,6 +1,7 @@
 form {
 	display: flex;
 	flex-direction: column;
+	margin-bottom: var(--spacing-5);
 }
 
 textarea {
@@ -13,4 +14,8 @@ textarea {
 	border: 1px solid var(--color-border);
 	overflow-wrap: break-word;
 	resize: none;
+}
+
+.error {
+	color: var(--color-text-danger);
 }
