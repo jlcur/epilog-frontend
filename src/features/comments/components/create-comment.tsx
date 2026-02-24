@@ -38,7 +38,9 @@ export const CreateComment = () => {
 			</label>
 
 			<div>
-				<Button type="submit">Post comment</Button>
+				<Button type="submit">
+					{createCommentMutation.isPending ? "Posting..." : "Post comment"}
+				</Button>
 			</div>
 		</form>
 	);
