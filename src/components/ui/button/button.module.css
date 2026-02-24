@@ -25,6 +25,7 @@
 
 	&.-primary {
 		background-color: var(--button-color-background-primary);
+		color: var(--color-neutral-0);
 
 		&:hover {
 			background-color: var(--button-color-background-primary-hover);

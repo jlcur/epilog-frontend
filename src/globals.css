@@ -4,6 +4,20 @@
 	/* ======================================== */
 
 	/* Colours */
+	--color-brand-0: #fafffd;
+	--color-brand-50: #ecfff6;
+	--color-brand-100: #dbfbed;
+	--color-brand-200: #c7eddc;
+	--color-brand-300: #abdac6;
+	--color-brand-400: #7bb99f;
+	--color-brand-500: #4a987b;
+	--color-brand-600: #0f7d5d;
+	--color-brand-700: #005f45;
+	--color-brand-800: #00432f;
+	--color-brand-900: #002113;
+	--color-brand-950: #000a05;
+	--color-brand-1000: #000000;
+
 	--color-neutral-0: #fefefe;
 	--color-neutral-50: #fafafa;
 	--color-neutral-100: #f4f4f4;
@@ -180,9 +194,9 @@
 	--color-border-danger: var();
 
 	--color-background: var(--color-neutral-100);
-	--color-background-primary: var(--color-blue-500);
-	--color-background-primary-hover: var(--color-blue-600);
-	--color-background-primary-pressed: var();
+	--color-background-primary: var(--color-brand-600);
+	--color-background-primary-hover: var(--color-brand-700);
+	--color-background-primary-pressed: var(--color-brand-700);
 	--color-background-secondary: var(--color-neutral-100);
 	--color-background-secondary-hover: var(--color-neutral-200);
 	--color-background-secondary-pressed: var();
@@ -240,8 +254,8 @@
 	--color-border-danger: var();
 
 	--color-background: var(--color-neutral-950);
-	--color-background-primary: var(--color-blue-500);
-	--color-background-primary-hover: var(--color-blue-600);
+	--color-background-primary: var(--color-brand-600);
+	--color-background-primary-hover: var(--color-brand-700);
 	--color-background-primary-pressed: var();
 	--color-background-secondary: var(--color-neutral-900);
 	--color-background-secondary-hover: var(--color-neutral-950);
