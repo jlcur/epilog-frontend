@@ -19,7 +19,7 @@ function FieldInfo({ field }: { field: AnyFieldApi }) {
 }
 
 const commentSchema = z.object({
-	content: z.string().min(100, "Comment content is required"),
+	content: z.string().min(1, "Comment content is required"),
 });
 
 export const CreateComment = () => {
