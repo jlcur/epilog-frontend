@@ -1,4 +1,6 @@
 import { Toast } from "@base-ui/react";
+import { TanStackDevtools } from "@tanstack/react-devtools";
+import { formDevtoolsPlugin } from "@tanstack/react-form-devtools";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import * as React from "react";
@@ -24,6 +26,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 			<ThemeProvider>
 				<Toast.Provider toastManager={toastManager} limit={1}>
 					{import.meta.env.DEV && <ReactQueryDevtools />}
+					{import.meta.env.DEV && (
+						<TanStackDevtools plugins={[formDevtoolsPlugin()]} />
+					)}
 					{children}
 
 					<ToastList />
