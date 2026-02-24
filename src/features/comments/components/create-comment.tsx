@@ -1,9 +1,26 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: TanStack Form uses children prop to render fields */
+
+import type { AnyFieldApi } from "@tanstack/react-form";
 import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
 import { useCreateComment } from "@/features/comments/api/create-comment";
 import styles from "./create-comment.module.css";
+
+function FieldInfo({ field }: { field: AnyFieldApi }) {
+	return (
+		<div className={styles.error}>
+			{field.state.meta.isTouched && !field.state.meta.isValid ? (
+				<em>{field.state.meta.errors.map((err) => err.message).join(",")}</em>
+			) : null}
+		</div>
+	);
+}
+
+const commentSchema = z.object({
+	content: z.string().min(100, "Comment content is required"),
+});
 
 export const CreateComment = () => {
 	const createCommentMutation = useCreateComment({
@@ -19,6 +36,9 @@ export const CreateComment = () => {
 	const form = useForm({
 		defaultValues: {
 			content: "",
+		},
+		validators: {
+			onChange: commentSchema,
 		},
 		onSubmit: async ({ value }) => {
 			createCommentMutation.mutate({
@@ -45,14 +65,6 @@ export const CreateComment = () => {
 				<div>
 					<form.Field
 						name="content"
-						validators={{
-							onChangeAsyncDebounceMs: 500,
-							onChangeAsync: ({ value }) => {
-								if (!value) {
-									return "Comment content is required";
-								}
-							},
-						}}
 						children={(field) => {
 							return (
 								<>
@@ -64,11 +76,7 @@ export const CreateComment = () => {
 										onBlur={field.handleBlur}
 										onChange={(e) => field.handleChange(e.target.value)}
 									/>
-									{field.state.meta.errors && (
-										<div className={styles.error}>
-											{field.state.meta.errors.join(",")}
-										</div>
-									)}
+									<FieldInfo field={field} />
 								</>
 							);
 						}}
