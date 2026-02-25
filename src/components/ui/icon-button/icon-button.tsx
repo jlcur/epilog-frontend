@@ -14,6 +14,7 @@ const iconButtonVariants = cva(styles.container, {
 			normal: styles.normal,
 			secondary: styles.secondary,
 			danger: styles.danger,
+			info: styles.info,
 		},
 	},
 	defaultVariants: {

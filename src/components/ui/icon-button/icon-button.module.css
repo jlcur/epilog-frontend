@@ -31,3 +31,7 @@
 .danger {
 	color: var(--color-icon-danger);
 }
+
+.info {
+	color: var(--color-icon-info);
+}
