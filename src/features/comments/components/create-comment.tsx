@@ -1,22 +1,12 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: TanStack Form uses children prop to render fields */
 
-import type { AnyFieldApi } from "@tanstack/react-form";
+import { Field } from "@base-ui/react/field";
 import { useForm } from "@tanstack/react-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
 import { useCreateComment } from "@/features/comments/api/create-comment";
 import styles from "./create-comment.module.css";
-
-function FieldInfo({ field }: { field: AnyFieldApi }) {
-	return (
-		<div className={styles.error}>
-			{field.state.meta.isTouched && !field.state.meta.isValid ? (
-				<em>{field.state.meta.errors.map((err) => err.message).join(",")}</em>
-			) : null}
-		</div>
-	);
-}
 
 const commentSchema = z.object({
 	content: z.string().min(1, "Comment content is required"),
@@ -53,7 +43,6 @@ export const CreateComment = () => {
 
 	return (
 		<div>
-			<h1>Comment form</h1>
 			<form
 				onSubmit={(e) => {
 					e.preventDefault();
@@ -67,8 +56,14 @@ export const CreateComment = () => {
 						name="content"
 						children={(field) => {
 							return (
-								<>
-									<label htmlFor={field.name}>Post content:</label>
+								<Field.Root
+									name={field.name}
+									invalid={!field.state.meta.isValid}
+									dirty={field.state.meta.isDirty}
+									touched={field.state.meta.isTouched}
+								>
+									<Field.Label>Add your comment</Field.Label>
+
 									<textarea
 										id={field.name}
 										name={field.name}
@@ -76,8 +71,18 @@ export const CreateComment = () => {
 										onBlur={field.handleBlur}
 										onChange={(e) => field.handleChange(e.target.value)}
 									/>
-									<FieldInfo field={field} />
-								</>
+
+									<Field.Error
+										match={
+											!field.state.meta.isValid && field.state.meta.isTouched
+										}
+										className={styles.error}
+									>
+										{field.state.meta.errors
+											.map((err) => err?.message)
+											.join(",")}
+									</Field.Error>
+								</Field.Root>
 							);
 						}}
 					/>
