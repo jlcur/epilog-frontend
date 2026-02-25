@@ -1,0 +1,5 @@
+.edit-comment {
+	background-color: var(--color-background);
+	color: var(--color-text-subtle);
+	font-size: var(--font-size-small);
+}

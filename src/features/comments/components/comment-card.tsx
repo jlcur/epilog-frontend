@@ -1,13 +1,34 @@
-import { Trash2 } from "lucide-react";
+import { SquarePen, Trash2 } from "lucide-react";
+
 import type React from "react";
+import type { SetStateAction } from "react";
+
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { IconButton } from "@/components/ui/icon-button/icon-button";
+import { UpdateComment } from "@/features/comments/components/update-comment";
 import { useCommentActions } from "@/features/comments/hooks/use-comment-actions";
 import type { Comment } from "@/types/api";
 import { convertDateToDistance } from "@/utils/date-utils/format-date";
 import styles from "./comment-card.module.css";
 
 type CommentActions = ReturnType<typeof useCommentActions>;
+
+type EditActionProps = {
+	isEditing: boolean;
+	setIsEditing: React.Dispatch<SetStateAction<boolean>>;
+};
+
+const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
+	return (
+		<IconButton
+			icon={<SquarePen size={14} />}
+			title="edit comment"
+			size="small"
+			variant="info"
+			onClick={() => setIsEditing(!isEditing)}
+		/>
+	);
+};
 
 const DeleteAction = ({ actions }: { actions: CommentActions }) => {
 	const { deleteComment, isDeleting } = actions;
@@ -50,11 +71,23 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 			<div className={styles.meta}>
 				<span>{timeSinceCommentPosted}</span>
 				<CommentActionsToolbar>
+					<EditAction
+						isEditing={actions.isEditing}
+						setIsEditing={actions.setIsEditing}
+					/>
 					<DeleteAction actions={actions} />
 					<CopyLinkAction actions={actions} />
 				</CommentActionsToolbar>
 			</div>
-			<pre className={styles.content}>{comment.content}</pre>
+			{actions.isEditing ? (
+				<UpdateComment
+					comment={comment}
+					updateComment={actions.updateComment}
+					setIsEditing={actions.setIsEditing}
+				/>
+			) : (
+				<pre className={styles.content}>{comment.content}</pre>
+			)}
 		</article>
 	);
 };
