@@ -54,7 +54,7 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 					<CopyLinkAction actions={actions} />
 				</CommentActionsToolbar>
 			</div>
-			<p className={styles.content}>{comment.content}</p>
+			<pre className={styles.content}>{comment.content}</pre>
 		</article>
 	);
 };
