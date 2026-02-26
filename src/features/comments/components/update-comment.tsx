@@ -37,7 +37,13 @@ export const UpdateComment = ({
 	});
 
 	function handleKeyPresses(e: any) {
-		if (e.key === "Escape") {
+		if (e.key === "Escape" && form.state.isDirty) {
+			if (confirm("Discard changes?")) {
+				setIsEditing(false);
+			}
+		}
+
+		if (e.key === "Escape" && form.state.isPristine) {
 			setIsEditing(false);
 		}
 
@@ -45,6 +51,17 @@ export const UpdateComment = ({
 			form.handleSubmit();
 		}
 	}
+
+	function handleCancel() {
+		if (form.state.isDirty) {
+			if (confirm("Discard changes?")) {
+				setIsEditing(false);
+			}
+		} else {
+			setIsEditing(false);
+		}
+	}
+
 	return (
 		<form
 			onSubmit={(e) => {
@@ -101,11 +118,7 @@ export const UpdateComment = ({
 						>
 							{isSubmitting ? "Updating..." : "Update comment"}
 						</Button>
-						<Button
-							type="button"
-							variant="secondary"
-							onClick={() => setIsEditing(false)}
-						>
+						<Button type="button" variant="secondary" onClick={handleCancel}>
 							Cancel
 						</Button>
 					</div>
