@@ -20,6 +20,7 @@ export type UpdateCommentProps = {
 export const UpdateComment = ({
 	comment,
 	updateComment,
+	setIsEditing,
 }: UpdateCommentProps) => {
 	const [commentText, _setCommentText] = useState(comment.content);
 
@@ -81,13 +82,20 @@ export const UpdateComment = ({
 			<form.Subscribe
 				selector={(state) => [state.canSubmit, state.isSubmitting]}
 				children={([canSubmit, isSubmitting]) => (
-					<div>
+					<div className={styles["button-controls"]}>
 						<Button
 							type="submit"
 							disabled={!canSubmit}
 							onClick={form.handleSubmit}
 						>
 							{isSubmitting ? "Updating..." : "Update comment"}
+						</Button>
+						<Button
+							type="button"
+							variant="secondary"
+							onClick={() => setIsEditing(false)}
+						>
+							Cancel
 						</Button>
 					</div>
 				)}

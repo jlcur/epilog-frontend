@@ -17,3 +17,8 @@
 		outline-offset: -1px;
 	}
 }
+
+.button-controls {
+	display: flex;
+	gap: var(--spacing-3);
+}
