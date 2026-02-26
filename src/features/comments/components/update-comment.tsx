@@ -8,7 +8,7 @@ import type { Comment } from "@/types/api";
 import styles from "./update-comment.module.css";
 
 const commentSchema = z.object({
-	content: z.string().min(1, "Comment content is required"),
+	content: z.string().trim().min(1, "Comment content is required"),
 });
 
 export type UpdateCommentProps = {

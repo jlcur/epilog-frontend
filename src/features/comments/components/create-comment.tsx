@@ -9,7 +9,7 @@ import { useCreateComment } from "@/features/comments/api/create-comment";
 import styles from "./create-comment.module.css";
 
 const commentSchema = z.object({
-	content: z.string().min(1, "Comment content is required"),
+	content: z.string().trim().min(1, "Comment content is required"),
 });
 
 export const CreateComment = () => {
@@ -33,7 +33,7 @@ export const CreateComment = () => {
 		onSubmit: async ({ value }) => {
 			createCommentMutation.mutate({
 				data: {
-					content: value.content,
+					content: value.content.trim(),
 				},
 			});
 
