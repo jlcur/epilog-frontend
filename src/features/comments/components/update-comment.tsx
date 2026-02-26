@@ -35,6 +35,16 @@ export const UpdateComment = ({
 			updateComment(value);
 		},
 	});
+
+	function handleKeyPresses(e: any) {
+		if (e.key === "Escape") {
+			setIsEditing(false);
+		}
+
+		if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+			form.handleSubmit();
+		}
+	}
 	return (
 		<form
 			onSubmit={(e) => {
@@ -64,6 +74,7 @@ export const UpdateComment = ({
 									// biome-ignore lint/a11y/noAutofocus: <explanation>
 									autoFocus={true}
 									className={styles["edit-comment"]}
+									onKeyDown={handleKeyPresses}
 								/>
 
 								<Field.Error
