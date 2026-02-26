@@ -31,7 +31,7 @@ export const CreateComment = () => {
 			onChange: commentSchema,
 		},
 		onSubmit: async ({ value }) => {
-			createCommentMutation.mutate({
+			await createCommentMutation.mutateAsync({
 				data: {
 					content: value.content.trim(),
 				},
