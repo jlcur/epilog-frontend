@@ -60,6 +60,8 @@ export const UpdateComment = ({
 									value={field.state.value}
 									onBlur={field.handleBlur}
 									onChange={(e) => field.handleChange(e.target.value)}
+									// biome-ignore lint/a11y/noAutofocus: <explanation>
+									autoFocus={true}
 									className={styles["edit-comment"]}
 								/>
 
