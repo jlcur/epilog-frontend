@@ -33,6 +33,12 @@ const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
 const DeleteAction = ({ actions }: { actions: CommentActions }) => {
 	const { deleteComment, isDeleting } = actions;
 
+	function handleDelete() {
+		if (confirm("Are you sure you want to delete this comment?")) {
+			deleteComment();
+		}
+	}
+
 	return (
 		<IconButton
 			icon={<Trash2 size={14} />}
@@ -40,7 +46,7 @@ const DeleteAction = ({ actions }: { actions: CommentActions }) => {
 			size="small"
 			variant="danger"
 			disabled={isDeleting}
-			onClick={deleteComment}
+			onClick={handleDelete}
 		/>
 	);
 };
