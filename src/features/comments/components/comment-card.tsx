@@ -64,6 +64,13 @@ const CommentActionsToolbar = ({ children }: CommentActionsToolbarProps) => {
 	return <div className={styles.actions}>{children}</div>;
 };
 
+const getIsEdited = (createdAt: Date, updatedAt: Date) => {
+	const created = new Date(createdAt).getTime();
+	const updated = new Date(updatedAt).getTime();
+
+	return updated - created > 2000;
+};
+
 type CommentCardProps = {
 	comment: Comment;
 };
@@ -75,7 +82,12 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 	return (
 		<article className={styles.comment}>
 			<div className={styles.meta}>
-				<span>{timeSinceCommentPosted}</span>
+				<div className={styles.time}>
+					<span>{timeSinceCommentPosted}</span>
+					{getIsEdited(comment.created_at, comment.updated_at) && (
+						<span>(edited)</span>
+					)}
+				</div>
 				<CommentActionsToolbar>
 					<EditAction
 						isEditing={actions.isEditing}

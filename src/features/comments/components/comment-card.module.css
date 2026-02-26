@@ -24,6 +24,11 @@
 		align-items: center;
 		justify-content: space-between;
 
+		> .time {
+			display: flex;
+			gap: var(--spacing-3);
+		}
+
 		> .actions {
 			display: flex;
 			gap: var(--spacing-4);
