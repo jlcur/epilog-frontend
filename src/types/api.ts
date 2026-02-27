@@ -12,4 +12,5 @@ export type Entity<T> = {
 
 export type Comment = Entity<{
 	content: string;
+	replies?: Comment[];
 }>;
