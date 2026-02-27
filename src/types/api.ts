@@ -2,6 +2,8 @@ export type BaseEntity = {
 	id: string;
 	created_at: Date;
 	updated_at: Date;
+	parent_id: string;
+	is_deleted: boolean;
 };
 
 export type Entity<T> = {
