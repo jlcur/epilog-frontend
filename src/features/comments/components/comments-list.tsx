@@ -1,9 +1,17 @@
+import { useMemo } from "react";
 import { CommentCard } from "@/features/comments/components/comment-card";
-import type { Comment } from "@/types/api";
+import {
+	buildCommentTree,
+	type CommentWithReplies,
+} from "@/features/comments/utils/build-comment-tree";
 import { useComments } from "../api/get-comments.ts";
 
 export const CommentsList = () => {
 	const { data: comments = [], isPending } = useComments();
+	const commentTree = useMemo(
+		() => buildCommentTree(comments ?? []),
+		[comments],
+	);
 
 	if (isPending) return <div>Loading...</div>;
 
@@ -14,7 +22,7 @@ export const CommentsList = () => {
 	return (
 		<div>
 			<ul>
-				{comments.map((comment: Comment) => (
+				{commentTree.map((comment: CommentWithReplies) => (
 					<li key={comment.id}>
 						<CommentCard comment={comment} />
 					</li>

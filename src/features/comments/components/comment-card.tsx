@@ -1,13 +1,14 @@
-import { SquarePen, Trash2 } from "lucide-react";
-
+import { Reply, SquarePen, Trash2 } from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
+import { useState } from "react";
 
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { IconButton } from "@/components/ui/icon-button/icon-button";
+import { CreateComment } from "@/features/comments/components/create-comment";
 import { UpdateComment } from "@/features/comments/components/update-comment";
 import { useCommentActions } from "@/features/comments/hooks/use-comment-actions";
-import type { Comment } from "@/types/api";
+import type { CommentWithReplies } from "@/features/comments/utils/build-comment-tree";
 import { convertDateToDistance } from "@/utils/date-utils/format-date";
 import styles from "./comment-card.module.css";
 
@@ -72,13 +73,15 @@ const getIsEdited = (createdAt: Date, updatedAt: Date) => {
 };
 
 type CommentCardProps = {
-	comment: Comment;
+	comment: CommentWithReplies;
 };
 
 export const CommentCard = ({ comment }: CommentCardProps) => {
 	const timeSinceCommentPosted = convertDateToDistance(comment.created_at);
 	const actions = useCommentActions({ commentId: comment.id });
 	const isCommentDeleted = comment.is_deleted;
+
+	const [isReplying, setIsReplying] = useState(false);
 
 	return (
 		<article className={styles.comment}>
@@ -108,6 +111,22 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 				/>
 			) : (
 				<pre className={styles.content}>{comment.content}</pre>
+			)}
+			<div className={styles.actions}>
+				<IconButton
+					icon={<Reply size={16} />}
+					title="reply to comment"
+					size="small"
+					onClick={() => setIsReplying(!isReplying)}
+				/>
+			</div>
+			{isReplying && <CreateComment parent={comment.id} />}
+			{comment.replies?.length > 0 && (
+				<div className={styles["reply-container"]}>
+					{comment.replies?.map((reply: CommentWithReplies) => (
+						<CommentCard key={reply.id} comment={reply} />
+					))}
+				</div>
 			)}
 		</article>
 	);
