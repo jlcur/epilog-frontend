@@ -78,6 +78,7 @@ type CommentCardProps = {
 export const CommentCard = ({ comment }: CommentCardProps) => {
 	const timeSinceCommentPosted = convertDateToDistance(comment.created_at);
 	const actions = useCommentActions({ commentId: comment.id });
+	const isCommentDeleted = comment.is_deleted;
 
 	return (
 		<article className={styles.comment}>
@@ -88,14 +89,16 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 						<span>(edited)</span>
 					)}
 				</div>
-				<CommentActionsToolbar>
-					<EditAction
-						isEditing={actions.isEditing}
-						setIsEditing={actions.setIsEditing}
-					/>
-					<DeleteAction actions={actions} />
-					<CopyLinkAction actions={actions} />
-				</CommentActionsToolbar>
+				{!isCommentDeleted && (
+					<CommentActionsToolbar>
+						<EditAction
+							isEditing={actions.isEditing}
+							setIsEditing={actions.setIsEditing}
+						/>
+						<DeleteAction actions={actions} />
+						<CopyLinkAction actions={actions} />
+					</CommentActionsToolbar>
+				)}
 			</div>
 			{actions.isEditing ? (
 				<UpdateComment
