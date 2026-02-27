@@ -7,6 +7,7 @@ import type { MutationConfig } from "@/lib/react-query";
 
 export const createCommentSchema = z.object({
 	content: z.string().min(1, "Content is required"),
+	parent_id: z.string().nullable().optional(),
 });
 
 export type CreateCommentInput = z.infer<typeof createCommentSchema>;

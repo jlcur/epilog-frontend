@@ -10,9 +10,10 @@ import styles from "./create-comment.module.css";
 
 const commentSchema = z.object({
 	content: z.string().trim().min(1, "Comment content is required"),
+	parent_id: z.string().nullable().optional(),
 });
 
-export const CreateComment = () => {
+export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 	const createCommentMutation = useCreateComment({
 		mutationConfig: {
 			onSuccess: () => {
@@ -34,6 +35,7 @@ export const CreateComment = () => {
 			await createCommentMutation.mutateAsync({
 				data: {
 					content: value.content.trim(),
+					parent_id: parent,
 				},
 			});
 
