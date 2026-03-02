@@ -1,4 +1,10 @@
-import { Reply, SquarePen, Trash2 } from "lucide-react";
+import {
+	ArrowBigDown,
+	ArrowBigUp,
+	Reply,
+	SquarePen,
+	Trash2,
+} from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
@@ -85,40 +91,53 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 
 	return (
 		<article className={styles.comment}>
-			<div className={styles.meta}>
-				<div className={styles.time}>
-					<span>{timeSinceCommentPosted}</span>
+			<div className={styles.header}>
+				<div className={styles.meta}>
+					<div className={styles.author}>theshadowylight</div>
+					<div className={styles.published}>{timeSinceCommentPosted}</div>
 					{getIsEdited(comment.created_at, comment.updated_at) && (
-						<span>(edited)</span>
+						<span className={styles.edited}>(edited)</span>
+					)}
+					{!isCommentDeleted && (
+						<CommentActionsToolbar>
+							<EditAction
+								isEditing={actions.isEditing}
+								setIsEditing={actions.setIsEditing}
+							/>
+							<DeleteAction actions={actions} />
+							<CopyLinkAction actions={actions} />
+						</CommentActionsToolbar>
 					)}
 				</div>
-				{!isCommentDeleted && (
-					<CommentActionsToolbar>
-						<EditAction
-							isEditing={actions.isEditing}
-							setIsEditing={actions.setIsEditing}
-						/>
-						<DeleteAction actions={actions} />
-						<CopyLinkAction actions={actions} />
-					</CommentActionsToolbar>
+			</div>
+
+			<div className={styles.content}>
+				{actions.isEditing ? (
+					<UpdateComment
+						comment={comment}
+						updateComment={actions.updateComment}
+						setIsEditing={actions.setIsEditing}
+					/>
+				) : (
+					<pre>{comment.content}</pre>
 				)}
 			</div>
-			{actions.isEditing ? (
-				<UpdateComment
-					comment={comment}
-					updateComment={actions.updateComment}
-					setIsEditing={actions.setIsEditing}
-				/>
-			) : (
-				<pre className={styles.content}>{comment.content}</pre>
-			)}
-			<div className={styles.actions}>
-				<IconButton
-					icon={<Reply size={16} />}
-					title="reply to comment"
-					size="small"
-					onClick={() => setIsReplying(!isReplying)}
-				/>
+
+			<div className={styles.footer}>
+				<div className={styles.votes}>
+					<ArrowBigUp size={18} />
+					17
+					<ArrowBigDown size={18} />
+				</div>
+				<div className={styles.reply}>
+					<IconButton
+						icon={<Reply size={18} />}
+						title="reply to comment"
+						size="small"
+						onClick={() => setIsReplying(!isReplying)}
+					/>
+					<span>Reply</span>
+				</div>
 			</div>
 			{isReplying && <CreateComment parent={comment.id} />}
 			{comment.replies?.length > 0 && (

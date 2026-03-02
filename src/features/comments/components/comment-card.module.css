@@ -1,47 +1,68 @@
 .comment {
-	margin: 1em 0;
 	background-color: var(--color-background-container);
-	border: 1px solid var(--color-border);
-	border-radius: var(--radius-small);
-	padding: var(--spacing-3) var(--spacing-5);
+	padding-left: var(--spacing-4);
+	border-left: 3px solid var(--color-border);
+	margin-bottom: var(--spacing-3);
+}
 
-	> .content {
-		font-size: var(--font-body);
-		margin-top: var(--spacing-5);
+.header {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-5);
+	padding: 0 var(--spacing-1);
+}
 
+.meta {
+	padding-top: var(--spacing-4);
+	display: flex;
+	align-items: baseline;
+	gap: var(--spacing-4);
+
+	> .author {
+		color: var(--color-text);
+		font-weight: 600;
+	}
+
+	> .published {
+		color: var(--color-text-subtlest);
+		font-size: var(--font-size-small);
+	}
+
+	> .edited {
+		color: var(--color-text-subtlest);
+		font-size: var(--font-heading-xxsmall);
+	}
+}
+
+.content {
+	padding: 0 var(--spacing-1);
+	color: var(--color-text-subtle);
+	line-height: 1.4;
+	border-bottom: 1px solid var(--color-border);
+
+	pre {
 		overflow-x: auto;
 		white-space: pre-wrap;
 		word-wrap: break-word;
+		font-family: inherit;
+	}
+}
+
+.footer {
+	display: flex;
+	justify-content: space-between;
+	padding: var(--spacing-3) var(--spacing-3);
+	color: var(--color-text-subtlest);
+	font-size: var(--font-size-medium);
+
+	> .votes {
+		display: flex;
+		align-items: center;
+		gap: var(--spacing-2);
 	}
 
-	> .meta {
+	> .reply {
 		display: flex;
-		font-size: var(--font-body-small);
-		color: var(--color-text-subtle);
-		padding: var(--spacing-3) 0;
-		border-bottom: 1px solid var(--color-border);
-		gap: 1em;
-		align-items: center;
-		justify-content: space-between;
-
-		> .time {
-			display: flex;
-			gap: var(--spacing-3);
-		}
-
-		> .actions {
-			display: flex;
-			gap: var(--spacing-4);
-		}
-	}
-
-	> .actions {
-		border-top: 1px solid var(--color-border);
-		display: flex;
-		font-size: var(--font-body-small);
-		padding: var(--spacing-3) 0;
-		gap: 1em;
-		align-items: center;
-		justify-content: space-between;
+		gap: var(--spacing-4);
 	}
 }
