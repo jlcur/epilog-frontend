@@ -36,7 +36,7 @@ export const Header = () => {
 							Sign up
 						</ButtonLink>
 						<ButtonLink to="/login" variant="secondary">
-							Login in
+							Login
 						</ButtonLink>
 					</div>
 				)}
