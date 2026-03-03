@@ -24,6 +24,7 @@
 		"@tanstack/react-router": "^1.161.1",
 		"@tanstack/react-router-devtools": "^1.161.1",
 		"axios": "^1.13.5",
+		"better-auth": "^1.5.1",
 		"class-variance-authority": "^0.7.1",
 		"date-fns": "^4.1.0",
 		"lucide-react": "^0.575.0",
