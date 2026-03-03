@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CommentsCommentIdRouteImport } from './routes/comments/$commentId'
 
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -31,30 +37,34 @@ const CommentsCommentIdRoute = CommentsCommentIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/signup': typeof SignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signup' | '/comments/$commentId'
+  fullPaths: '/' | '/login' | '/signup' | '/comments/$commentId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signup' | '/comments/$commentId'
-  id: '__root__' | '/' | '/signup' | '/comments/$commentId'
+  to: '/' | '/login' | '/signup' | '/comments/$commentId'
+  id: '__root__' | '/' | '/login' | '/signup' | '/comments/$commentId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
   SignupRoute: typeof SignupRoute
   CommentsCommentIdRoute: typeof CommentsCommentIdRoute
 }
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -87,6 +104,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
   SignupRoute: SignupRoute,
   CommentsCommentIdRoute: CommentsCommentIdRoute,
 }
