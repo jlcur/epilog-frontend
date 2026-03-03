@@ -1,5 +1,6 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: <explanation> */
 import { useForm } from "@tanstack/react-form";
+import { useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { TextField } from "@/components/ui/form/text-field";
@@ -14,6 +15,8 @@ const signUpSchema = z.object({
 });
 
 export const SignupForm = () => {
+	const [serverError, setServerError] = useState<string | null>(null);
+
 	const form = useForm({
 		defaultValues: {
 			username: "",
@@ -37,9 +40,7 @@ export const SignupForm = () => {
 						});
 					},
 					onError: (ctx) => {
-						toastManager.add({
-							description: ctx.error.message,
-						});
+						setServerError(ctx.error.message || "An unexpected error occurred");
 					},
 				},
 			);
@@ -49,6 +50,12 @@ export const SignupForm = () => {
 	return (
 		<div className={styles.form}>
 			<h2 className={styles.title}>Sign up</h2>
+
+			{serverError && (
+				<div className={styles.error} role="alert">
+					{serverError}
+				</div>
+			)}
 
 			<form
 				onSubmit={(e) => {
