@@ -1,4 +1,4 @@
-.container {
+.header-container {
 	width: 100%;
 	max-width: 960px;
 	margin: 0 auto;
@@ -9,11 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 
-	> h1 {
+	> .heading {
 		font-size: var(--font-heading-xxlarge);
 	}
-}
-
-.user {
-	display: flex;
 }
