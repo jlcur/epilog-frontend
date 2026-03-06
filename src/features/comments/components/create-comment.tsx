@@ -64,45 +64,55 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 									dirty={field.state.meta.isDirty}
 									touched={field.state.meta.isTouched}
 								>
-									<Field.Label>Add your comment</Field.Label>
-
-									<textarea
-										id={field.name}
-										name={field.name}
-										value={field.state.value}
-										onBlur={field.handleBlur}
-										onChange={(e) => field.handleChange(e.target.value)}
-									/>
-
-									<Field.Error
-										match={
-											!field.state.meta.isValid && field.state.meta.isTouched
-										}
-										className={styles.error}
-									>
-										{field.state.meta.errors
-											.map((err) => err?.message)
-											.join(",")}
-									</Field.Error>
+									<div className={styles["comment-editor"]}>
+										<textarea
+											id={field.name}
+											name={field.name}
+											className={styles.text}
+											value={field.state.value}
+											onBlur={field.handleBlur}
+											placeholder="Add your comment..."
+											onChange={(e) => field.handleChange(e.target.value)}
+										/>
+										<Field.Error
+											match={
+												!field.state.meta.isValid && field.state.meta.isTouched
+											}
+											className={styles.error}
+										>
+											{field.state.meta.errors
+												.map((err) => err?.message)
+												.join(",")}
+										</Field.Error>
+										<div className={styles.footer}>
+											<div className={styles.options}>
+												<div className={styles.option}>Placeholder</div>
+												<div className={styles.option}>Placeholder</div>
+											</div>
+											<form.Subscribe
+												selector={(state) => [
+													state.canSubmit,
+													state.isSubmitting,
+												]}
+												children={([canSubmit, isSubmitting]) => (
+													<div>
+														<Button
+															type="submit"
+															disabled={!canSubmit}
+															onClick={form.handleSubmit}
+														>
+															{isSubmitting ? "Posting..." : "Post comment"}
+														</Button>
+													</div>
+												)}
+											/>
+										</div>
+									</div>
 								</Field.Root>
 							);
 						}}
 					/>
 				</div>
-				<form.Subscribe
-					selector={(state) => [state.canSubmit, state.isSubmitting]}
-					children={([canSubmit, isSubmitting]) => (
-						<div>
-							<Button
-								type="submit"
-								disabled={!canSubmit}
-								onClick={form.handleSubmit}
-							>
-								{isSubmitting ? "Posting..." : "Post comment"}
-							</Button>
-						</div>
-					)}
-				/>
 			</form>
 		</div>
 	);
