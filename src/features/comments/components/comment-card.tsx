@@ -1,16 +1,8 @@
-import {
-	ArrowBigDown,
-	ArrowBigUp,
-	Reply,
-	SquarePen,
-	Trash2,
-} from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
 
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
-import { IconButton } from "@/components/ui/icon-button/icon-button";
 import { CreateComment } from "@/features/comments/components/create-comment";
 import { UpdateComment } from "@/features/comments/components/update-comment";
 import { useCommentActions } from "@/features/comments/hooks/use-comment-actions";
@@ -27,13 +19,11 @@ type EditActionProps = {
 
 const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
 	return (
-		<IconButton
-			icon={<SquarePen size={14} />}
-			title="edit comment"
-			size="small"
-			variant="info"
-			onClick={() => setIsEditing(!isEditing)}
-		/>
+		<li>
+			<button type="button" onClick={() => setIsEditing(!isEditing)}>
+				Edit
+			</button>
+		</li>
 	);
 };
 
@@ -47,20 +37,36 @@ const DeleteAction = ({ actions }: { actions: CommentActions }) => {
 	}
 
 	return (
-		<IconButton
-			icon={<Trash2 size={14} />}
-			title="delete comment"
-			size="small"
-			variant="danger"
-			disabled={isDeleting}
-			onClick={handleDelete}
-		/>
+		<li>
+			<button type="button" disabled={isDeleting} onClick={handleDelete}>
+				Delete
+			</button>
+		</li>
 	);
 };
 
 const CopyLinkAction = ({ actions }: { actions: CommentActions }) => {
 	const { commentUrl } = actions;
-	return <CopyButton textToCopy={commentUrl} />;
+	return (
+		<li>
+			<CopyButton textToCopy={commentUrl} />
+		</li>
+	);
+};
+
+type ReplyActionsProps = {
+	isReplying: boolean;
+	setIsReplying: React.Dispatch<SetStateAction<boolean>>;
+};
+
+const ReplyAction = ({ isReplying, setIsReplying }: ReplyActionsProps) => {
+	return (
+		<li>
+			<button type="button" onClick={() => setIsReplying(!isReplying)}>
+				Reply
+			</button>
+		</li>
+	);
 };
 
 type CommentActionsToolbarProps = {
@@ -68,7 +74,7 @@ type CommentActionsToolbarProps = {
 };
 
 const CommentActionsToolbar = ({ children }: CommentActionsToolbarProps) => {
-	return <div className={styles.actions}>{children}</div>;
+	return <menu className={styles.post}>{children}</menu>;
 };
 
 const getIsEdited = (createdAt: Date, updatedAt: Date) => {
@@ -86,32 +92,42 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 	const timeSinceCommentPosted = convertDateToDistance(comment.created_at);
 	const actions = useCommentActions({ commentId: comment.id });
 	const isCommentDeleted = comment.is_deleted;
+	const isReply = comment.parent_id !== null;
 
 	const [isReplying, setIsReplying] = useState(false);
 
 	return (
-		<article className={styles.comment}>
-			<div className={styles.header}>
-				<div className={styles.meta}>
-					<div className={styles.author}>theshadowylight</div>
-					<div className={styles.published}>{timeSinceCommentPosted}</div>
-					{getIsEdited(comment.created_at, comment.updated_at) && (
-						<span className={styles.edited}>(edited)</span>
-					)}
-					{!isCommentDeleted && (
-						<CommentActionsToolbar>
-							<EditAction
-								isEditing={actions.isEditing}
-								setIsEditing={actions.setIsEditing}
-							/>
-							<DeleteAction actions={actions} />
-							<CopyLinkAction actions={actions} />
-						</CommentActionsToolbar>
-					)}
+		<article className={styles["comment-card"]}>
+			{isReply && (
+				<div className={styles.threadline}>
+					<div className={styles.line} />
 				</div>
-			</div>
+			)}
 
-			<div className={styles.content}>
+			<div className={`${styles.comment} ${!isReply && styles["-root"]}`}>
+				<header className={styles.header}>
+					<img
+						className={styles.avatar}
+						src="https://api.dicebear.com/9.x/big-ears/svg?seed=Aneka"
+						aria-label="user avatar"
+						alt="avatar"
+					/>
+					<div className={styles.userinfo}>
+						<bdi className={styles.username}>theshadowlight</bdi>
+						<div className={styles.publish}>
+							<time
+								dateTime={new Date(comment.created_at).toString()}
+								className={styles.timestamp}
+							>
+								{timeSinceCommentPosted}
+							</time>
+							{getIsEdited(comment.created_at, comment.updated_at) && (
+								<span className={styles.edited}>(edited)</span>
+							)}
+						</div>
+					</div>
+				</header>
+
 				{actions.isEditing ? (
 					<UpdateComment
 						comment={comment}
@@ -119,34 +135,35 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 						setIsEditing={actions.setIsEditing}
 					/>
 				) : (
-					<pre>{comment.content}</pre>
+					<pre className={styles.body}>{comment.content}</pre>
+				)}
+
+				<footer className={styles.actions}>
+					{!isCommentDeleted && (
+						<CommentActionsToolbar>
+							<EditAction
+								isEditing={actions.isEditing}
+								setIsEditing={actions.setIsEditing}
+							/>
+							<DeleteAction actions={actions} />
+							<ReplyAction
+								isReplying={isReplying}
+								setIsReplying={setIsReplying}
+							/>
+							<CopyLinkAction actions={actions} />
+						</CommentActionsToolbar>
+					)}
+				</footer>
+
+				{isReplying && <CreateComment parent={comment.id} />}
+				{comment.replies?.length > 0 && (
+					<div className={styles.replies}>
+						{comment.replies?.map((reply: CommentWithReplies) => (
+							<CommentCard key={reply.id} comment={reply} />
+						))}
+					</div>
 				)}
 			</div>
-
-			<div className={styles.footer}>
-				<div className={styles.votes}>
-					<ArrowBigUp size={18} />
-					17
-					<ArrowBigDown size={18} />
-				</div>
-				<div className={styles.reply}>
-					<IconButton
-						icon={<Reply size={18} />}
-						title="reply to comment"
-						size="small"
-						onClick={() => setIsReplying(!isReplying)}
-					/>
-					<span>Reply</span>
-				</div>
-			</div>
-			{isReplying && <CreateComment parent={comment.id} />}
-			{comment.replies?.length > 0 && (
-				<div className={styles["reply-container"]}>
-					{comment.replies?.map((reply: CommentWithReplies) => (
-						<CommentCard key={reply.id} comment={reply} />
-					))}
-				</div>
-			)}
 		</article>
 	);
 };

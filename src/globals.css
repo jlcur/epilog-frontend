@@ -32,6 +32,22 @@
 	/*--color-neutral-950: #070707;*/
 	/*--color-neutral-1000: #000000;*/
 
+	--color-l-bg: #fafafa;
+	--color-l-bg-lighter: #f8f8f8;
+	--color-l-bg-darker: #ffffff;
+	--color-l-text: #333535;
+	--color-l-text-darker: #606060;
+	--color-l-text-lighter: #908f94;
+	--color-l-border: #e4e4e4;
+
+	--color-d-bg: #1c1d22;
+	--color-d-bg-lighter: #222327;
+	--color-d-bg-darker: #191a1f;
+	--color-d-text: #9c9da1;
+	--color-d-text-darker: #55565b;
+	--color-d-text-lighter: #87888d;
+	--color-d-border: #27282d;
+
 	--color-neutral-0: #fafafa;
 	--color-neutral-300: #edeff1;
 	--color-neutral-600: #9fa3ab;
@@ -101,18 +117,18 @@
 	--color-red-1000: #010000;
 
 	/* Spacing */
-	--spacing-1: 1px;
-	--spacing-2: 2px;
-	--spacing-3: 4px;
-	--spacing-4: 8px;
-	--spacing-5: 12px;
-	--spacing-6: 16px;
-	--spacing-7: 20px;
-	--spacing-8: 24px;
-	--spacing-9: 32px;
-	--spacing-10: 48px;
-	--spacing-11: 64px;
-	--spacing-12: 80px;
+	--spacing-1: 0.0625em;
+	--spacing-2: 0.125em;
+	--spacing-3: 0.25em;
+	--spacing-4: 0.5em;
+	--spacing-5: 0.75em;
+	--spacing-6: 1em;
+	--spacing-7: 1.25em;
+	--spacing-8: 1.5em;
+	--spacing-9: 2em;
+	--spacing-10: 3em;
+	--spacing-11: 4em;
+	--spacing-12: 5em;
 
 	/* Sizing */
 	--size-xxsmall: 1px;
@@ -169,30 +185,32 @@
 
 	--shadow: var(--shadow-1);
 
-	--opacity-disabled: var();
-	--opacity-loading: var();
+	/*--opacity-disabled: var();*/
+	/*--opacity-loading: var();*/
 }
 
 [data-theme="light"] {
-	--color-text: var(--color-neutral-1000);
+	--color-text: var(--color-l-text);
+	--color-text-darker: var(--color-l-text-darker);
+	--color-text-lighter: var(--color-l-text-lighter);
 	--color-text-subtle: var(--color-neutral-800);
 	--color-text-subtlest: var(--color-neutral-600);
-	--color-text-primary: var();
-	--color-text-primary-bolder: var();
-	--color-text-success: var();
-	--color-text-success-bolder: var();
-	--color-text-information: var();
-	--color-text-information-bolder: var();
-	--color-text-warning: var();
-	--color-text-warning-bolder: var();
-	--color-text-danger: var(--color-red-500);
-	--color-text-danger-bolder: var();
-	--color-text-disabled: var();
+	/*--color-text-primary: var();*/
+	/*--color-text-primary-bolder: var();*/
+	/*--color-text-success: var();*/
+	/*--color-text-success-bolder: var();*/
+	/*--color-text-information: var();*/
+	/*--color-text-information-bolder: var();*/
+	/*--color-text-warning: var();*/
+	/*--color-text-warning-bolder: var();*/
+	/*--color-text-danger: var(--color-red-500);*/
+	/*--color-text-danger-bolder: var();*/
+	/*--color-text-disabled: var();*/
 
-	--color-link: var();
-	--color-link-pressed: var();
-	--color-link-visited: var();
-	--color-link-visited-pressed: var();
+	/*--color-link: var();*/
+	/*--color-link-pressed: var();*/
+	/*--color-link-visited: var();*/
+	/*--color-link-visited-pressed: var();*/
 
 	--color-icon: var();
 	--color-icon-primary: var();
@@ -200,13 +218,15 @@
 	--color-icon-danger: var(--color-red-500);
 	--color-icon-info: var(--color-blue-500);
 
-	--color-border: var(--color-neutral-300);
+	--color-border: var(--color-l-border);
 	--color-border-disabled: var();
 	--color-border-focused: var(--color-blue-400);
 	--color-border-input: var();
 	--color-border-danger: var();
 
-	--color-background: var(--color-neutral-100);
+	--color-background: var(--color-l-bg);
+	--color-background-lighter: var(--color-l-bg-lighter);
+	--color-background-darker: var(--color-l-bg-darker);
 	--color-background-primary: var(--color-brand-600);
 	--color-background-primary-hover: var(--color-brand-700);
 	--color-background-primary-pressed: var(--color-brand-700);
@@ -235,7 +255,9 @@
 }
 
 [data-theme="dark"] {
-	--color-text: var(--color-neutral-0);
+	--color-text: var(--color-d-text);
+	--color-text-darker: var(--color-d-text-darker);
+	--color-text-lighter: var(--color-d-text-lighter);
 	--color-text-subtle: var(--color-white-88);
 	--color-text-subtlest: var(--color-white-56);
 	--color-text-primary: var();
@@ -261,13 +283,15 @@
 	--color-icon-danger: var(--color-red-500);
 	--color-icon-info: var(--color-blue-500);
 
-	--color-border: var(--color-neutral-800);
+	--color-border: var(--color-d-border);
 	--color-border-disabled: var();
 	--color-border-focused: var(--color-blue-700);
 	--color-border-input: var();
 	--color-border-danger: var();
 
-	--color-background: var(--color-neutral-950);
+	--color-background: var(--color-d-bg);
+	--color-background-lighter: var(--color-d-bg-lighter);
+	--color-background-darker: var(--color-d-bg-darker);
 	--color-background-primary: var(--color-brand-600);
 	--color-background-primary-hover: var(--color-brand-700);
 	--color-background-primary-pressed: var();
@@ -299,7 +323,7 @@ body {
 	font-family:
 		Inter, apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
 		sans-serif;
-	background-color: var(--color-background);
+	background-color: var(--color-background-darker);
 
 	color: var(--color-text);
 	line-height: 1.5;
