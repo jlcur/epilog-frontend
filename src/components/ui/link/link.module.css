@@ -1,0 +1,4 @@
+.link {
+	padding: var(--spacing-3) var(--spacing-4);
+	color: inherit;
+}

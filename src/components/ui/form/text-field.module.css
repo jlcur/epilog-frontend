@@ -1,0 +1,42 @@
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+	width: 100%;
+	margin-bottom: var(--spacing-6);
+
+	> .label {
+		font-weight: 600;
+		line-height: 1.25rem;
+		font-size: var(--font-size-small);
+	}
+
+	> .input {
+		box-sizing: border-box;
+		padding: var(--spacing-7) var(--spacing-5);
+		margin: 0;
+		border: 2px solid var(--color-border);
+		border-radius: var(--radius-small);
+		width: 100%;
+		height: 2.5rem;
+		font-family: inherit;
+		background-color: transparent;
+
+		&:focus {
+			outline: 2px solid var(--color-border-focused);
+			outline-offset: -1px;
+		}
+	}
+
+	> .error {
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+		color: var(--color-text-danger);
+	}
+
+	> .description {
+		margin: 0;
+		font-size: 0.875rem;
+		line-height: 1.25rem;
+	}
+}

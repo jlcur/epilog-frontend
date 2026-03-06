@@ -13,3 +13,7 @@
 		font-size: var(--font-heading-xxlarge);
 	}
 }
+
+.user {
+	display: flex;
+}
