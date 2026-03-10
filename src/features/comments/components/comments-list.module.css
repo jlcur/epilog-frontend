@@ -1,0 +1,10 @@
+.comments-list {
+	background-color: var(--color-background-card);
+	margin-top: var(--spacing-9);
+	border-radius: var(--radius-large) var(--radius-large);
+
+	> .comment {
+		display: flex;
+		flex-direction: column;
+	}
+}
