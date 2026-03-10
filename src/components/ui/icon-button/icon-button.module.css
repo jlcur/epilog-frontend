@@ -1,37 +1,58 @@
-.container {
-	all: unset;
-	position: relative;
+.icon-button {
+	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	transition:
-		background 0.2s ease,
-		color 0.2s ease;
+	border-radius: var(--radius-large);
+	transition: background-color 150ms ease;
 	cursor: pointer;
+
+	&:disabled {
+		opacity: 0.4;
+		pointer-events: none;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color-border-focused);
+		outline-offset: 2px;
+	}
 }
 
 .sizeS {
-	width: 14px;
-	height: 14px;
+	padding: var(--spacing-2);
+	border-radius: var(--radius-small);
 }
 
 .sizeM {
-	width: 24px;
-	height: 24px;
+	padding: var(--spacing-3);
 }
 
 .sizeL {
-	width: 32px;
-	height: 32px;
+	padding: var(--spacing-4);
 }
 
 .normal {
+	background: var(--color-background-neutral-dim);
+	color: var(--color-text-subtle);
+
+	&:hover {
+		background: var(--color-background-neutral-hover);
+	}
+}
+
+.ghost {
 	background: transparent;
+	color: var(--color-text-subtle);
+
+	&:hover {
+		background: var(--color-background-neutral-hover);
+	}
 }
 
 .danger {
-	color: var(--color-icon-danger);
-}
+	background: var(--color-background-danger-dim);
+	color: var(--color-text-danger-lighter);
 
-.info {
-	color: var(--color-icon-info);
+	&:hover {
+		background: var(--color-background-danger-hover);
+	}
 }
