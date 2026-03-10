@@ -1,36 +1,33 @@
 .comment-editor {
-	border-radius: var(--radius-small);
+	border-radius: var(--radius-large);
 	border: 1px solid var(--color-border);
-	margin-bottom: var(--spacing-5);
+	background-color: var(--color-card-title-background);
 
-	> .text {
-		padding: var(--spacing-5);
+	> .textarea {
+		background-color: var(--color-background);
+		border-radius: var(--radius-large);
 		width: 100%;
-		color: var(--color-text);
-		overflow-wrap: break-word;
-		resize: none;
-		border-bottom: 1px solid var(--color-border);
-		background-color: var(--color-background-darker);
+		padding: var(--spacing-4);
+		color: var(--color-text-subtle);
+		word-break: break-all;
 		min-height: 120px;
 
 		&:focus {
-			outline: 2px solid var(--color-border-focused);
-			outline-offset: -1px;
+			outline: 1px solid var(--color-border-focused);
 		}
 	}
 
 	> .footer {
-		padding: var(--spacing-4);
-		background-color: var(--color-background-lighter);
-		color: var(--color-text-darker);
-		font-weight: bold;
-		font-size: var(--font-body);
 		display: flex;
 		justify-content: space-between;
+		padding: var(--spacing-4);
+		background-color: var(--color-card-title-background);
+		border-radius: var(--radius-large);
 	}
 
 	> .footer > .options {
 		display: flex;
+		align-items: center;
 		gap: var(--spacing-5);
 	}
 
@@ -40,10 +37,9 @@
 	}
 
 	> .error {
-		background-color: var(--color-background-danger);
-		color: var(--color-text-danger);
-		padding: var(--spacing-2) var(--spacing-4);
+		color: var(--color-text-danger-lighter);
+		margin-top: var(--spacing-4);
+		margin-left: var(--spacing-4);
 		font-size: var(--font-body);
-		border-bottom: 1px solid var(--color-border);
 	}
 }
