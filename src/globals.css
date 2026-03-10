@@ -107,8 +107,69 @@
 }
 
 [data-theme="light"] {
-	--color-grid-background: var(--white);
-	--color-card-background: var(--neutral-50);
+	--color-text: var(--neutral-900);
+	--color-text-subtle: var(--neutral-500);
+	--color-text-subtler: var(--neutral-300);
+	--color-text-darkest: var(--neutral-950);
+	--color-text-primary: var(--white);
+	--color-text-primary-light: var(--brand-500);
+	--color-text-danger: var(--color-text-darkest);
+	--color-text-danger-lighter: var(--red-500);
+	--color-text-success: var(--color-text-darkest);
+	--color-text-success-lighter: var(--green-500);
+	--color-text-info: var(--color-text-darkest);
+	--color-text-info-lighter: var(--blue-500);
+	--color-text-warning: var(--color-text-darkest);
+	--color-text-warning-lighter: var(--yellow-500);
+
+	--color-background-primary: var(--brand-500);
+	--color-background-primary-dim: var(--brand-900);
+	--color-background-primary-hover: ;
+	--color-background-primary-pressed: ;
+	--color-background-danger: var(--red-400);
+	--color-background-danger-dim: var(--red-900);
+	--color-background-danger-hover: ;
+	--color-background-danger-pressed: ;
+	--color-background-neutral: var(--neutral-500);
+	--color-background-neutral-dim: var(--neutral-100);
+	--color-background-neutral-hover: var(--neutral-200);
+	--color-background-neutral-pressed: ;
+	--color-background-success: var(--green-500);
+	--color-background-success-dim: var(--green-900);
+	--color-background-success-hover: ;
+	--color-background-success-pressed: ;
+	--color-background-info: var(--blue-500);
+	--color-background-info-dim: var(--blue-900);
+	--color-background-info-hover: ;
+	--color-background-info-pressed: ;
+	--color-background-warning: var(--yellow-500);
+	--color-background-warning-dim: var(--yellow-900);
+	--color-background-warning-hover: ;
+	--color-background-warning-pressed: ;
+	--color-background-input: ;
+	--color-background-input-hover: ;
+	--color-background-outline: ;
+	--color-background-outline-hover: ;
+	--color-background-ghost: ;
+	--color-background-ghost-hover: ;
+
+	--color-border: var(--neutral-200);
+	--color-border-primary: var(--brand-500);
+	--color-border-danger: var(--red-400);
+	--color-border-neutral: var(--neutral-500);
+	--color-border-success: var(--green-500);
+	--color-border-info: var(--blue-500);
+	--color-border-warning: var(--yellow-500);
+	--color-border-focused: var(--neutral-300);
+	--color-border-input: ;
+
+	--color-link: var(--blue-500);
+	--color-link-pressed: ;
+	--color-link-visited: ;
+	--color-link-visited-pressed: ;
+
+	--color-background: var(--white);
+	--color-background-card: var(--neutral-50);
 	--color-card-border: var(--neutral-200);
 	--color-card-title-background: var(--neutral-100);
 }
