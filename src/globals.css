@@ -183,8 +183,8 @@
 
 body {
 	font-family:
-		Inter, apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial,
-		sans-serif;
+		"Figtree Variable", Inter, apple-system, BlinkMacSystemFont, Roboto,
+		Helvetica, Arial, sans-serif;
 	background-color: var(--color-background);
 
 	color: var(--color-text);
