@@ -58,6 +58,9 @@
 	--size-large: 8px;
 	--size-xlarge: 12px;
 	--size-xxlarge: 16px;
+	--size-xxxlarge: 28px;
+	--size-4xlarge: 36px;
+	--size-5xlarge: 44px;
 	--size-full: 9999px;
 
 	/* Typography */
@@ -162,8 +165,10 @@
 	--color-border-warning: var(--yellow-500);
 	--color-border-focused: var(--neutral-300);
 	--color-border-input: ;
+	--color-border-ring: ;
 
 	--color-link: var(--blue-500);
+	--color-link-hover: var(--blue-900);
 	--color-link-pressed: ;
 	--color-link-visited: ;
 	--color-link-visited-pressed: ;
@@ -230,8 +235,10 @@
 	--color-border-warning: var(--yellow-500);
 	--color-border-focused: var(--neutral-300);
 	--color-border-input: ;
+	--color-border-ring: var(--blue-500);
 
 	--color-link: var(--blue-500);
+	--color-link-hover: var(--blue-900);
 	--color-link-pressed: ;
 	--color-link-visited: ;
 	--color-link-visited-pressed: ;

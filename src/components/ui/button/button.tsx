@@ -12,6 +12,10 @@ const buttonVariants = cva(styles.button, {
 			secondary: styles["-secondary"],
 			ghost: styles["-ghost"],
 			link: styles["-link"],
+			success: styles["-success"],
+			info: styles["-info"],
+			danger: styles["-danger"],
+			warning: styles["-warning"],
 		},
 		size: {
 			default: styles["-default"],
@@ -26,12 +30,19 @@ const buttonVariants = cva(styles.button, {
 	},
 });
 
+const iconSize = {
+	default: 16,
+	small: 14,
+	large: 18,
+	icon: 20,
+} as const;
+
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
 	VariantProps<typeof buttonVariants> & {
 		asChild?: boolean;
 		isLoading?: boolean;
-		iconLeft?: React.ReactNode;
-		iconRight?: React.ReactNode;
+		iconLeft?: React.ElementType;
+		iconRight?: React.ElementType;
 	};
 
 const Button = React.forwardRef<
@@ -54,19 +65,23 @@ const Button = React.forwardRef<
 	) => {
 		const Comp = asChild ? Slot : "button";
 
-		const classes = [buttonVariants({ variant, size }), className]
-			.filter(Boolean)
-			.join(" ");
+		const IconLeft = iconLeft;
+		const IconRight = iconRight;
+		const resolvedSize = size ?? "default";
 
 		return (
-			<Comp className={classes} ref={ref} {...props}>
+			<Comp
+				className={buttonVariants({ variant, size, className })}
+				ref={ref}
+				{...props}
+			>
 				{isLoading && "Loading..."}
-				{!isLoading && iconLeft && (
-					<span className={styles.iconWrapper}>{iconLeft}</span>
+				{IconLeft && (
+					<IconLeft size={iconSize[resolvedSize]} aria-hidden="true" />
 				)}
-				<span className={styles.textWrapper}>{!isLoading && children}</span>
-				{!isLoading && iconRight && (
-					<span className={styles.iconWrapper}>{iconRight}</span>
+				<span className={styles.textWrapper}>{children}</span>
+				{IconRight && (
+					<IconRight size={iconSize[resolvedSize]} aria-hidden="true" />
 				)}
 			</Comp>
 		);
