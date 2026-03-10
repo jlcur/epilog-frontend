@@ -68,7 +68,7 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 										<textarea
 											id={field.name}
 											name={field.name}
-											className={styles.text}
+											className={styles.textarea}
 											value={field.state.value}
 											onBlur={field.handleBlur}
 											placeholder="Add your comment..."
@@ -101,7 +101,7 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 															disabled={!canSubmit}
 															onClick={form.handleSubmit}
 														>
-															{isSubmitting ? "Posting..." : "Post comment"}
+															{isSubmitting ? "Saving..." : "Save"}
 														</Button>
 													</div>
 												)}
