@@ -1,8 +1,9 @@
+import { ArrowBigDown, ArrowBigUp, EllipsisVertical } from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
-
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
+import { IconButton } from "@/components/ui/icon-button/icon-button";
 import { CreateComment } from "@/features/comments/components/create-comment";
 import { UpdateComment } from "@/features/comments/components/update-comment";
 import { useCommentActions } from "@/features/comments/hooks/use-comment-actions";
@@ -115,7 +116,11 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 							<span className={styles.edited}>(edited)</span>
 						)}
 					</div>
-					<div className={styles.more}>⋮</div>
+					<IconButton
+						icon={EllipsisVertical}
+						title="More comment actions"
+						variant="ghost"
+					/>
 				</div>
 
 				{/* TODO: conditionally render tags */}
@@ -159,9 +164,9 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 						</CommentActionsToolbar>
 
 						<div className={styles.voting}>
-							<div className={styles.vote}>arrow up</div>
+							<IconButton icon={ArrowBigUp} title="Upvote" />
 							<div>16</div>
-							<div className={styles.vote}>arrow down</div>
+							<IconButton icon={ArrowBigDown} title="Downvote" />
 						</div>
 					</>
 				)}
