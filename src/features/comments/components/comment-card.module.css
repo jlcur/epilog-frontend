@@ -53,23 +53,6 @@
 		font-size: var(--font-heading-xxsmall);
 	}
 
-	> .header > .details > .more {
-		margin-left: var(--spacing-6);
-		color: var(--color-text);
-		font-weight: 400;
-		width: 24px;
-		height: 24px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: var(--radius-large);
-
-		&:hover {
-			cursor: pointer;
-			background-color: var(--color-background-neutral-hover);
-		}
-	}
-
 	> .header > .tags {
 		display: flex;
 		gap: var(--spacing-4);
@@ -143,15 +126,5 @@
 		align-items: center;
 		gap: var(--spacing-3);
 		color: var(--color-text-subtle);
-	}
-
-	> .footer > .voting > .vote {
-		background-color: var(--color-background-neutral-dim);
-		color: var(--color-text-subtle);
-		padding: var(--spacing-3) var(--spacing-4);
-		border-radius: var(--radius-medium);
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 }
