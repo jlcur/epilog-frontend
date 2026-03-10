@@ -98,6 +98,7 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 													<div>
 														<Button
 															type="submit"
+															variant="success"
 															disabled={!canSubmit}
 															onClick={form.handleSubmit}
 														>

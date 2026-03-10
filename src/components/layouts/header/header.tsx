@@ -33,12 +33,10 @@ export const Header = () => {
 					</>
 				) : (
 					<div className={styles.user}>
-						<ButtonLink to="/signup" variant="link">
+						<ButtonLink to="/signup" variant="ghost">
 							Sign up
 						</ButtonLink>
-						<ButtonLink to="/login" variant="secondary">
-							Login
-						</ButtonLink>
+						<ButtonLink to="/login">Login</ButtonLink>
 					</div>
 				)}
 			</div>

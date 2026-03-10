@@ -12,4 +12,9 @@
 	> .heading {
 		font-size: var(--font-heading-xxlarge);
 	}
+
+	> .auth > .user {
+		display: flex;
+		gap: var(--spacing-4);
+	}
 }

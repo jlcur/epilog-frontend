@@ -2,6 +2,7 @@ import { ArrowBigDown, ArrowBigUp, EllipsisVertical } from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button/button";
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { IconButton } from "@/components/ui/icon-button/icon-button";
 import { CreateComment } from "@/features/comments/components/create-comment";
@@ -20,10 +21,15 @@ type EditActionProps = {
 
 const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
 	return (
-		<li className={styles.action}>
-			<button type="button" onClick={() => setIsEditing(!isEditing)}>
+		<li>
+			<Button
+				type="button"
+				size="small"
+				variant="ghost"
+				onClick={() => setIsEditing(!isEditing)}
+			>
 				Edit
-			</button>
+			</Button>
 		</li>
 	);
 };
@@ -38,10 +44,16 @@ const DeleteAction = ({ actions }: { actions: CommentActions }) => {
 	}
 
 	return (
-		<li className={styles.action}>
-			<button type="button" disabled={isDeleting} onClick={handleDelete}>
+		<li>
+			<Button
+				type="button"
+				size="small"
+				variant="ghost"
+				disabled={isDeleting}
+				onClick={handleDelete}
+			>
 				Delete
-			</button>
+			</Button>
 		</li>
 	);
 };
@@ -62,10 +74,15 @@ type ReplyActionsProps = {
 
 const ReplyAction = ({ isReplying, setIsReplying }: ReplyActionsProps) => {
 	return (
-		<li className={styles.action}>
-			<button type="button" onClick={() => setIsReplying(!isReplying)}>
+		<li>
+			<Button
+				type="button"
+				variant="ghost"
+				size="small"
+				onClick={() => setIsReplying(!isReplying)}
+			>
 				Reply
-			</button>
+			</Button>
 		</li>
 	);
 };

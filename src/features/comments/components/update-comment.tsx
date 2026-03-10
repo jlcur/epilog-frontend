@@ -113,12 +113,13 @@ export const UpdateComment = ({
 					<div className={styles["button-controls"]}>
 						<Button
 							type="submit"
+							variant="success"
 							disabled={!canSubmit}
 							onClick={form.handleSubmit}
 						>
-							{isSubmitting ? "Updating..." : "Update comment"}
+							{isSubmitting ? "Saving..." : "Save"}
 						</Button>
-						<Button type="button" variant="secondary" onClick={handleCancel}>
+						<Button type="button" variant="ghost" onClick={handleCancel}>
 							Cancel
 						</Button>
 					</div>
