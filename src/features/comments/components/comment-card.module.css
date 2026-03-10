@@ -116,6 +116,7 @@
 		margin-top: var(--spacing-6);
 		display: flex;
 		justify-content: space-between;
+		font-size: var(--font-body);
 	}
 
 	> .footer > .actions {
