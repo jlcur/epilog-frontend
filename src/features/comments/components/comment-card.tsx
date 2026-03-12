@@ -9,6 +9,7 @@ import { CreateComment } from "@/features/comments/components/create-comment";
 import { UpdateComment } from "@/features/comments/components/update-comment";
 import { useCommentActions } from "@/features/comments/hooks/use-comment-actions";
 import type { CommentWithReplies } from "@/features/comments/utils/build-comment-tree";
+import { useSession } from "@/lib/auth/session";
 import { convertDateToDistance } from "@/utils/date-utils/format-date";
 import styles from "./comment-card.module.css";
 
@@ -111,6 +112,9 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 	const actions = useCommentActions({ commentId: comment.id });
 	const isCommentDeleted = comment.is_deleted;
 	const isReply = comment.parent_id !== null;
+	const { data: session } = useSession();
+	const isUserOwnerOfComment = comment.user_id === session?.user.id;
+	const displayUsername = comment.user_name || "[ Deleted user ]";
 
 	const [isReplying, setIsReplying] = useState(false);
 
@@ -122,7 +126,7 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 			<header className={styles.header}>
 				<div className={styles.details}>
 					<div className={styles.user}>
-						<bdi className={styles.username}>theshadowylight</bdi>
+						<bdi className={styles.username}>{displayUsername}</bdi>
 						<time
 							dateTime={new Date(comment.created_at).toString()}
 							className={styles.publishdate}
@@ -168,11 +172,15 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 				{!isCommentDeleted && (
 					<>
 						<CommentActionsToolbar>
-							<EditAction
-								isEditing={actions.isEditing}
-								setIsEditing={actions.setIsEditing}
-							/>
-							<DeleteAction actions={actions} />
+							{isUserOwnerOfComment && (
+								<EditAction
+									isEditing={actions.isEditing}
+									setIsEditing={actions.setIsEditing}
+								/>
+							)}
+
+							{isUserOwnerOfComment && <DeleteAction actions={actions} />}
+
 							<ReplyAction
 								isReplying={isReplying}
 								setIsReplying={setIsReplying}
