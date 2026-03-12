@@ -1,4 +1,10 @@
-import { ArrowBigDown, ArrowBigUp, EllipsisVertical } from "lucide-react";
+import {
+	ArrowBigDown,
+	ArrowBigUp,
+	EllipsisVertical,
+	ListMinus,
+	ListPlus,
+} from "lucide-react";
 import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
@@ -130,6 +136,7 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 	const isUserLoggedIn = !!session?.user;
 
 	const [isReplying, setIsReplying] = useState(false);
+	const [showReplies, setShowReplies] = useState(true);
 
 	return (
 		<article
@@ -150,11 +157,19 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 							<span className={styles.edited}>(edited)</span>
 						)}
 					</div>
-					<IconButton
-						icon={EllipsisVertical}
-						title="More comment actions"
-						variant="ghost"
-					/>
+					<div>
+						<IconButton
+							icon={EllipsisVertical}
+							title="More comment actions"
+							variant="ghost"
+						/>
+						<IconButton
+							icon={showReplies ? ListMinus : ListPlus}
+							title="Toggle show replies"
+							variant="ghost"
+							onClick={() => setShowReplies(!showReplies)}
+						/>
+					</div>
 				</div>
 
 				{/* TODO: conditionally render tags */}
@@ -214,11 +229,15 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 			</footer>
 
 			{/* ===== Replies ===== */}
-			{comment.replies?.length > 0 && (
-				<div className={styles.replies}>
-					{comment.replies?.map((reply: CommentWithReplies) => (
-						<CommentCard key={reply.id} comment={reply} />
-					))}
+			{showReplies && (
+				<div>
+					{comment.replies?.length > 0 && (
+						<div className={styles.replies}>
+							{comment.replies?.map((reply: CommentWithReplies) => (
+								<CommentCard key={reply.id} comment={reply} />
+							))}
+						</div>
+					)}
 				</div>
 			)}
 		</article>
