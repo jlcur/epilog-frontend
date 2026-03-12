@@ -1,11 +1,14 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: <explanation> */
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { TextField } from "@/components/ui/form/text-field";
 import { CustomLink } from "@/components/ui/link/link";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
+import { queryKey } from "@/config/query-key";
 import { authClient } from "@/lib/auth-client";
 import styles from "./signup-form.module.css";
 
@@ -17,6 +20,8 @@ const signUpSchema = z.object({
 
 export const SignupForm = () => {
 	const [serverError, setServerError] = useState<string | null>(null);
+	const queryClient = useQueryClient();
+	const router = useRouter();
 
 	const form = useForm({
 		defaultValues: {
@@ -36,9 +41,11 @@ export const SignupForm = () => {
 				},
 				{
 					onSuccess: () => {
+						queryClient.invalidateQueries({ queryKey: queryKey.session });
 						toastManager.add({
 							description: "Your account was created",
 						});
+						router.navigate({ to: "/" });
 					},
 					onError: (ctx) => {
 						setServerError(ctx.error.message || "An unexpected error occurred");
