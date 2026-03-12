@@ -3,6 +3,7 @@ import type React from "react";
 import type { SetStateAction } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button/button";
+import { ButtonLink } from "@/components/ui/button-link/button-link";
 import { CopyButton } from "@/components/ui/copy-button/copy-button";
 import { IconButton } from "@/components/ui/icon-button/icon-button";
 import { CreateComment } from "@/features/comments/components/create-comment";
@@ -71,19 +72,30 @@ const CopyLinkAction = ({ actions }: { actions: CommentActions }) => {
 type ReplyActionsProps = {
 	isReplying: boolean;
 	setIsReplying: React.Dispatch<SetStateAction<boolean>>;
+	isUserLoggedIn: boolean;
 };
 
-const ReplyAction = ({ isReplying, setIsReplying }: ReplyActionsProps) => {
+const ReplyAction = ({
+	isReplying,
+	setIsReplying,
+	isUserLoggedIn,
+}: ReplyActionsProps) => {
 	return (
 		<li>
-			<Button
-				type="button"
-				variant="ghost"
-				size="small"
-				onClick={() => setIsReplying(!isReplying)}
-			>
-				Reply
-			</Button>
+			{isUserLoggedIn ? (
+				<Button
+					type="button"
+					variant="ghost"
+					size="small"
+					onClick={() => setIsReplying(!isReplying)}
+				>
+					Reply
+				</Button>
+			) : (
+				<ButtonLink to={"/login"} variant="ghost" size="small">
+					Reply
+				</ButtonLink>
+			)}
 		</li>
 	);
 };
@@ -115,6 +127,7 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 	const { data: session } = useSession();
 	const isUserOwnerOfComment = comment.user_id === session?.user.id;
 	const displayUsername = comment.user_name || "[ Deleted user ]";
+	const isUserLoggedIn = !!session?.user;
 
 	const [isReplying, setIsReplying] = useState(false);
 
@@ -165,7 +178,9 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 				)}
 			</div>
 
-			{isReplying && <CreateComment parent={comment.id} />}
+			{isReplying && (
+				<CreateComment parent={comment.id} setIsReplying={setIsReplying} />
+			)}
 
 			{/* ===== Footer ===== */}
 			<footer className={styles.footer}>
@@ -184,6 +199,7 @@ export const CommentCard = ({ comment }: CommentCardProps) => {
 							<ReplyAction
 								isReplying={isReplying}
 								setIsReplying={setIsReplying}
+								isUserLoggedIn={isUserLoggedIn}
 							/>
 							<CopyLinkAction actions={actions} />
 						</CommentActionsToolbar>

@@ -36,6 +36,11 @@
 		align-items: center;
 	}
 
+	> .footer > .actions {
+		display: flex;
+		gap: var(--spacing-4);
+	}
+
 	> .error {
 		color: var(--color-text-danger-lighter);
 		margin-top: var(--spacing-4);

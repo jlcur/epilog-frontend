@@ -2,6 +2,8 @@
 
 import { Field } from "@base-ui/react/field";
 import { useForm } from "@tanstack/react-form";
+import type React from "react";
+import type { SetStateAction } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
@@ -13,7 +15,15 @@ const commentSchema = z.object({
 	parent_id: z.string().nullable().optional(),
 });
 
-export const CreateComment = ({ parent = null }: { parent: string | null }) => {
+export type CreateCommentProps = {
+	parent?: string | null;
+	setIsReplying?: React.Dispatch<SetStateAction<boolean>>;
+};
+
+export const CreateComment = ({
+	parent = null,
+	setIsReplying,
+}: CreateCommentProps) => {
 	const createCommentMutation = useCreateComment({
 		mutationConfig: {
 			onSuccess: () => {
@@ -42,6 +52,20 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 			form.reset();
 		},
 	});
+
+	function handleCancel() {
+		if (form.state.isDirty) {
+			if (confirm("Discard changes?")) {
+				if (setIsReplying) {
+					setIsReplying(false);
+				}
+			}
+		} else {
+			if (setIsReplying) {
+				setIsReplying(false);
+			}
+		}
+	}
 
 	return (
 		<div>
@@ -95,7 +119,16 @@ export const CreateComment = ({ parent = null }: { parent: string | null }) => {
 													state.isSubmitting,
 												]}
 												children={([canSubmit, isSubmitting]) => (
-													<div>
+													<div className={styles.actions}>
+														{setIsReplying && (
+															<Button
+																type="button"
+																variant="ghost"
+																onClick={handleCancel}
+															>
+																Cancel
+															</Button>
+														)}
 														<Button
 															type="submit"
 															variant="success"
