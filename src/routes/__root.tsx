@@ -4,6 +4,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import * as React from "react";
 import { Head } from "@/components/head/head";
 import { Header } from "@/components/layouts/header/header";
+import { getSessionQueryOptions } from "@/lib/auth/session";
 
 interface RouterContext {
 	queryClient: QueryClient;
@@ -12,6 +13,10 @@ interface RouterContext {
 export const Route = createRootRouteWithContext<RouterContext>()({
 	component: RootComponent,
 	errorComponent: () => <div>Something went wrong</div>,
+	loader: async ({ context }) => {
+		const session = await context.queryClient.ensureQueryData(getSessionQueryOptions());
+		return { session };
+	},
 });
 
 function RootComponent() {
