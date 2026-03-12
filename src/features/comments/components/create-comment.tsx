@@ -49,6 +49,10 @@ export const CreateComment = ({
 				},
 			});
 
+			if (setIsReplying) {
+				setIsReplying(false);
+			}
+
 			form.reset();
 		},
 	});
