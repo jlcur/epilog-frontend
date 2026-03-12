@@ -1,18 +1,32 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button/button";
 import { ButtonLink } from "@/components/ui/button-link/button-link";
 import { CustomLink } from "@/components/ui/link/link";
 import { ThemeSwitcher } from "@/components/ui/theme-switcher/theme-switcher";
+import { toastManager } from "@/components/ui/toasts/toast-manager";
+import { queryKey } from "@/config/query-key";
+import { useSession } from "@/lib/auth/session";
 import { authClient } from "@/lib/auth-client";
 import styles from "./header.module.css";
 
 export const Header = () => {
 	const router = useRouter();
-	const { data: session, isPending } = authClient.useSession();
+	const { data: session, isPending } = useSession();
+	const queryClient = useQueryClient();
 
 	const handleLogout = async () => {
 		await authClient.signOut();
+
+		await queryClient.invalidateQueries({ queryKey: queryKey.session });
+
 		router.invalidate();
+
+		toastManager.add({
+			title: "Logged out",
+		});
+
+		router.navigate({ to: "/" });
 	};
 
 	return (
@@ -24,7 +38,7 @@ export const Header = () => {
 			<div className={styles.auth}>
 				{isPending ? (
 					<span>Loading...</span>
-				) : session ? (
+				) : session?.user ? (
 					<>
 						<span>{session.user.name}</span>
 						<Button variant="ghost" onClick={handleLogout}>
