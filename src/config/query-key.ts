@@ -4,4 +4,5 @@ export const queryKey = {
 		byId: (id: string, include?: string) =>
 			["comments", id, include ?? ""] as const,
 	},
+	session: ["session"] as const,
 };
