@@ -6,6 +6,20 @@ export type BaseEntity = {
 	is_deleted: boolean;
 };
 
+export type User = {
+	id: string;
+	name: string;
+	email: string;
+	emailVerified: boolean;
+	image?: string | null | undefined;
+	createdAt: Date;
+	updatedAt: Date;
+	role?: string | undefined;
+	banned: boolean | null;
+	banReason?: string | null | undefined;
+	banExpires?: Date | null | undefined;
+};
+
 export type Entity<T> = {
 	[K in keyof T]: T[K];
 } & BaseEntity;
