@@ -13,4 +13,7 @@ export const queryKey = {
 		list: (query: ListUsersQuery) => ["users", "list", query] as const,
 		byId: (id: string) => ["users", id] as const,
 	},
+	posts: {
+		all: (page?: number, limit?: number) => ["posts", page, limit] as const,
+	},
 };

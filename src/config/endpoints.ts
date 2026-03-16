@@ -6,4 +6,7 @@ export const endpoints = {
 		create: "comment",
 		update: (commentId: string) => `comment/${commentId}`,
 	},
+	posts: {
+		all: "post",
+	},
 };

@@ -20,6 +20,23 @@ export type User = {
 	banExpires?: Date | null | undefined;
 };
 
+export type Post = {
+	id: string;
+	title: string;
+	content: string;
+	created_at: Date;
+	updated_at: Date;
+	user_id: string;
+	user_name?: string;
+};
+
+export type PaginatedResponse<T> = {
+	data: T[];
+	total: number;
+	currentPage: number;
+	totalPages: number;
+};
+
 export type Entity<T> = {
 	[K in keyof T]: T[K];
 } & BaseEntity;
