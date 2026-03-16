@@ -7,8 +7,9 @@ interface BasicLinkProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
 
 const BasicLinkComponent = React.forwardRef<HTMLAnchorElement, BasicLinkProps>(
-	(props, ref) => {
-		return <a ref={ref} {...props} className={styles.link} />;
+	({ className, ...props }, ref) => {
+		const combinedClasses = `${styles.link} ${className ?? ""}`.trim();
+		return <a ref={ref} {...props} className={combinedClasses} />;
 	},
 );
 
