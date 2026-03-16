@@ -1,12 +1,18 @@
 export const endpoints = {
 	comments: {
-		all: "comment",
-		getById: (commentId: string) => `comment/${commentId}`,
-		delete: (commentId: string) => `comment/${commentId}`,
-		create: "comment",
-		update: (commentId: string) => `comment/${commentId}`,
+		base: "/comments",
+		all: "/comments/",
+		byId: (commentId: string) => `/comments/${commentId}`,
+		delete: (commentId: string) => `/comments/${commentId}`,
+		create: "/comments/",
+		update: (commentId: string) => `/comments/${commentId}`,
 	},
 	posts: {
-		all: "post",
+		base: "/posts",
+		all: "/posts/",
+		byId: (postId: string) => `/posts/${postId}`,
+		delete: (postId: string) => `/posts/${postId}`,
+		create: "/posts/",
+		update: (postId: string) => `/posts/${postId}`,
 	},
 };

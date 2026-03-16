@@ -6,7 +6,7 @@ import type { QueryConfig } from "@/lib/react-query";
 import type { Comment } from "@/types/api";
 
 export const getComment = (commentId: string): Promise<Comment> => {
-	return api.get(endpoints.comments.getById(commentId));
+	return api.get(endpoints.comments.byId(commentId));
 };
 
 export const getCommentQueryOptions = (commentId: string) => {
