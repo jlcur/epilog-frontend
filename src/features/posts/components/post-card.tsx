@@ -1,0 +1,28 @@
+import { CustomLink } from "@/components/ui/link/link";
+import type { Post } from "@/types/api";
+import { convertDateToDistance } from "@/utils/date-utils/format-date";
+import styles from "./post-card.module.css";
+
+type PostCardProps = {
+	post: Post;
+};
+
+export const PostCard = ({ post }: PostCardProps) => {
+	const timeSincePostCreated = convertDateToDistance(post.created_at);
+
+	return (
+		<div className={styles["post-card"]}>
+			<div className={styles.post}>
+				<CustomLink to={"/"} className={styles.title}>
+					{post.title}
+				</CustomLink>
+				<div className={styles.details}>
+					<span className={styles.created}>
+						created {timeSincePostCreated} by {post.user_name}
+					</span>
+				</div>
+			</div>
+			<div className={styles.meta}></div>
+		</div>
+	);
+};
