@@ -13,7 +13,11 @@ export const PostCard = ({ post }: PostCardProps) => {
 	return (
 		<div className={styles["post-card"]}>
 			<div className={styles.post}>
-				<CustomLink to={"/"} className={styles.title}>
+				<CustomLink
+					to={"/posts/$postId"}
+					params={{ postId: post.id }}
+					className={styles.title}
+				>
 					{post.title}
 				</CustomLink>
 				<div className={styles.details}>
