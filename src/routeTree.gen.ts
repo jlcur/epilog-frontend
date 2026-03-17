@@ -13,6 +13,7 @@ import { Route as UnauthenticatedRouteRouteImport } from './routes/_unauthentica
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PostsIndexRouteImport } from './routes/posts/index'
+import { Route as PostsPostIdRouteImport } from './routes/posts/$postId'
 import { Route as CommentsCommentIdRouteImport } from './routes/comments/$commentId'
 import { Route as UnauthenticatedSignupRouteImport } from './routes/_unauthenticated/signup'
 import { Route as UnauthenticatedLoginRouteImport } from './routes/_unauthenticated/login'
@@ -35,6 +36,11 @@ const IndexRoute = IndexRouteImport.update({
 const PostsIndexRoute = PostsIndexRouteImport.update({
   id: '/posts/',
   path: '/posts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsPostIdRoute = PostsPostIdRouteImport.update({
+  id: '/posts/$postId',
+  path: '/posts/$postId',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommentsCommentIdRoute = CommentsCommentIdRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof UnauthenticatedLoginRoute
   '/signup': typeof UnauthenticatedSignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
   '/posts/': typeof PostsIndexRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
 }
@@ -78,6 +85,7 @@ export interface FileRoutesByTo {
   '/login': typeof UnauthenticatedLoginRoute
   '/signup': typeof UnauthenticatedSignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
   '/posts': typeof PostsIndexRoute
   '/admin/users': typeof AuthenticatedAdminUsersRoute
 }
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   '/_unauthenticated/login': typeof UnauthenticatedLoginRoute
   '/_unauthenticated/signup': typeof UnauthenticatedSignupRoute
   '/comments/$commentId': typeof CommentsCommentIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
   '/posts/': typeof PostsIndexRoute
   '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
 }
@@ -101,6 +110,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/comments/$commentId'
+    | '/posts/$postId'
     | '/posts/'
     | '/admin/users'
   fileRoutesByTo: FileRoutesByTo
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/signup'
     | '/comments/$commentId'
+    | '/posts/$postId'
     | '/posts'
     | '/admin/users'
   id:
@@ -121,6 +132,7 @@ export interface FileRouteTypes {
     | '/_unauthenticated/login'
     | '/_unauthenticated/signup'
     | '/comments/$commentId'
+    | '/posts/$postId'
     | '/posts/'
     | '/_authenticated/admin/users'
   fileRoutesById: FileRoutesById
@@ -130,6 +142,7 @@ export interface RootRouteChildren {
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   UnauthenticatedRouteRoute: typeof UnauthenticatedRouteRouteWithChildren
   CommentsCommentIdRoute: typeof CommentsCommentIdRoute
+  PostsPostIdRoute: typeof PostsPostIdRoute
   PostsIndexRoute: typeof PostsIndexRoute
 }
 
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/posts'
       fullPath: '/posts/'
       preLoaderRoute: typeof PostsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts/$postId': {
+      id: '/posts/$postId'
+      path: '/posts/$postId'
+      fullPath: '/posts/$postId'
+      preLoaderRoute: typeof PostsPostIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/comments/$commentId': {
@@ -244,6 +264,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   UnauthenticatedRouteRoute: UnauthenticatedRouteRouteWithChildren,
   CommentsCommentIdRoute: CommentsCommentIdRoute,
+  PostsPostIdRoute: PostsPostIdRoute,
   PostsIndexRoute: PostsIndexRoute,
 }
 export const routeTree = rootRouteImport
