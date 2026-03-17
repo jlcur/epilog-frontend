@@ -5,6 +5,7 @@ export const queryKey = {
 		all: ["comments"] as const,
 		byId: (id: string, include?: string) =>
 			["comments", id, include ?? ""] as const,
+		byPost: (postId: string) => ["posts", postId, "comments"] as const,
 	},
 	session: ["session"] as const,
 	users: {
