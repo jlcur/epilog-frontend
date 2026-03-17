@@ -3,8 +3,12 @@ import { endpoints } from "@/config/endpoints";
 import { queryKey } from "@/config/query-key";
 import { api } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
+import type { PaginatedResponse, Post } from "@/types/api";
 
-export const getPosts = async (page = 1, limit = 20) => {
+export const getPosts = async (
+	page = 1,
+	limit = 20,
+): Promise<PaginatedResponse<Post>> => {
 	return await api.get(endpoints.posts.all, {
 		params: { page, limit },
 	});

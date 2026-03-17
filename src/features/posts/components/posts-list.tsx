@@ -1,4 +1,6 @@
+import { keepPreviousData } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
+import { ButtonLink } from "@/components/ui/button-link/button-link";
 import { usePosts } from "@/features/posts/api/get-posts";
 import { PostCard } from "@/features/posts/components/post-card";
 import type { Post } from "@/types/api";
@@ -6,21 +8,72 @@ import styles from "./posts-list.module.css";
 
 const route = getRouteApi("/posts/");
 
+type PaginationControlsProps = {
+	page: number;
+	totalPages: number;
+};
+
+const PaginationControls = ({ page, totalPages }: PaginationControlsProps) => {
+	const isPreviousButtonDisabled = page === 1;
+	const isNextButtonDisabled = page >= totalPages;
+
+	return (
+		<nav className={styles.pagination}>
+			<ButtonLink
+				to="."
+				search={(prev) => ({
+					...prev,
+					page: (prev.page ?? 1) - 1,
+				})}
+				type="button"
+				variant="ghost"
+				disabled={isPreviousButtonDisabled}
+			>
+				Previous
+			</ButtonLink>
+
+			<span>
+				Page {page} / {totalPages}
+			</span>
+
+			<ButtonLink
+				to="."
+				search={(prev) => ({
+					...prev,
+					page: page + 1,
+				})}
+				type="button"
+				variant="ghost"
+				disabled={isNextButtonDisabled}
+			>
+				Next
+			</ButtonLink>
+		</nav>
+	);
+};
+
 export const PostsList = () => {
 	const { page, limit } = route.useSearch();
-	const { data, isPending } = usePosts({ page, limit });
+	const { data, isPending } = usePosts({
+		page,
+		limit,
+		queryConfig: { placeholderData: keepPreviousData },
+	});
 	const posts: Post[] = data?.data ?? [];
 
 	if (isPending) return <div>Loading...</div>;
 	if (posts.length === 0) return <div>No posts found.</div>;
 
 	return (
-		<ul className={styles["posts-list"]}>
-			{posts.map((post: Post) => (
-				<li key={post.id}>
-					<PostCard post={post} />
-				</li>
-			))}
-		</ul>
+		<>
+			<ul className={styles["posts-list"]}>
+				{posts.map((post: Post) => (
+					<li key={post.id}>
+						<PostCard post={post} />
+					</li>
+				))}
+			</ul>
+			<PaginationControls page={page} totalPages={data?.totalPages ?? 1} />
+		</>
 	);
 };
