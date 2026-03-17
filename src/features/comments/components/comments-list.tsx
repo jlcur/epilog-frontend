@@ -7,8 +7,9 @@ import {
 import { useComments } from "../api/get-comments.ts";
 import styles from "./comments-list.module.css";
 
-export const CommentsList = () => {
-	const { data: comments = [], isPending } = useComments();
+export const CommentsList = ({ postId }: { postId: string }) => {
+	const { data: comments = [], isPending } = useComments({ postId });
+
 	const commentTree = useMemo(
 		() => buildCommentTree(comments ?? []),
 		[comments],
