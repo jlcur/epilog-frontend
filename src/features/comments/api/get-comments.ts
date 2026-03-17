@@ -5,24 +5,31 @@ import { api } from "@/lib/api-client";
 import type { QueryConfig } from "@/lib/react-query";
 import type { Comment } from "@/types/api";
 
-export const getComments = (): Promise<Comment[]> => {
-	return api.get(endpoints.comments.all);
+export const getComments = (postId?: string): Promise<Comment[]> => {
+	const url = postId
+		? endpoints.posts.comments(postId)
+		: endpoints.comments.all;
+	return api.get(url);
 };
 
-export const getCommentsQueryOptions = () => {
+export const getCommentsQueryOptions = (postId?: string) => {
 	return queryOptions({
-		queryKey: queryKey.comments.all,
-		queryFn: getComments,
+		queryKey: postId ? queryKey.comments.byPost(postId) : queryKey.comments.all,
+		queryFn: () => getComments(postId),
 	});
 };
 
 type UseCommentsOptions = {
+	postId?: string;
 	queryConfig?: QueryConfig<typeof getCommentsQueryOptions>;
 };
 
-export const useComments = ({ queryConfig = {} }: UseCommentsOptions = {}) => {
+export const useComments = ({
+	postId,
+	queryConfig = {},
+}: UseCommentsOptions = {}) => {
 	return useQuery({
-		...getCommentsQueryOptions(),
+		...getCommentsQueryOptions(postId),
 		...queryConfig,
 	});
 };
