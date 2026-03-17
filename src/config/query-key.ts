@@ -15,5 +15,6 @@ export const queryKey = {
 	},
 	posts: {
 		all: (page?: number, limit?: number) => ["posts", page, limit] as const,
+		byId: (id: string) => ["posts", id] as const,
 	},
 };
