@@ -8,6 +8,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
 import { toastManager } from "@/components/ui/toasts/toast-manager";
 import { useCreateComment } from "@/features/comments/api/create-comment";
+import { Route } from "@/routes/posts/$postId";
 import styles from "./create-comment.module.css";
 
 const commentSchema = z.object({
@@ -24,7 +25,10 @@ export const CreateComment = ({
 	parent = null,
 	setIsReplying,
 }: CreateCommentProps) => {
+	const { postId } = Route.useParams();
+
 	const createCommentMutation = useCreateComment({
+		postId,
 		mutationConfig: {
 			onSuccess: () => {
 				toastManager.add({
@@ -43,6 +47,7 @@ export const CreateComment = ({
 		},
 		onSubmit: async ({ value }) => {
 			await createCommentMutation.mutateAsync({
+				postId: postId,
 				data: {
 					content: value.content.trim(),
 					parent_id: parent,
