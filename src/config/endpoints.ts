@@ -4,7 +4,7 @@ export const endpoints = {
 		all: "/comments/",
 		byId: (commentId: string) => `/comments/${commentId}`,
 		delete: (commentId: string) => `/comments/${commentId}`,
-		create: "/comments/",
+		create: (postId: string) => `/posts/${postId}/comments`,
 		update: (commentId: string) => `/comments/${commentId}`,
 	},
 	posts: {
@@ -14,5 +14,6 @@ export const endpoints = {
 		delete: (postId: string) => `/posts/${postId}`,
 		create: "/posts/",
 		update: (postId: string) => `/posts/${postId}`,
+		comments: (postId: string) => `/posts/${postId}/comments`,
 	},
 };
