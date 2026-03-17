@@ -10,15 +10,21 @@ const route = getRouteApi("/posts/");
 
 type PaginationControlsProps = {
 	page: number;
+	limit: number;
 	totalPages: number;
 };
 
-const PaginationControls = ({ page, totalPages }: PaginationControlsProps) => {
+const PaginationControls = ({
+	page,
+	limit,
+	totalPages,
+}: PaginationControlsProps) => {
 	const isPreviousButtonDisabled = page === 1;
 	const isNextButtonDisabled = page >= totalPages;
 
 	return (
 		<nav className={styles.pagination}>
+			<span>Showing {limit} results per page</span>
 			<ButtonLink
 				to="."
 				search={(prev) => ({
@@ -31,11 +37,9 @@ const PaginationControls = ({ page, totalPages }: PaginationControlsProps) => {
 			>
 				Previous
 			</ButtonLink>
-
 			<span>
-				Page {page} / {totalPages}
+				Page {page} of {totalPages}
 			</span>
-
 			<ButtonLink
 				to="."
 				search={(prev) => ({
@@ -73,7 +77,11 @@ export const PostsList = () => {
 					</li>
 				))}
 			</ul>
-			<PaginationControls page={page} totalPages={data?.totalPages ?? 1} />
+			<PaginationControls
+				page={page}
+				limit={limit}
+				totalPages={data?.totalPages ?? 1}
+			/>
 		</>
 	);
 };
