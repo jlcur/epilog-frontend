@@ -1,0 +1,28 @@
+.edit-post {
+	color: var(--color-text-subtle);
+	font-size: var(--font-size-small);
+	width: 100%;
+	background-color: var(--color-background);
+	display: flex;
+	height: 150px;
+	padding: var(--spacing-3);
+	margin: var(--spacing-4) 0;
+	border: 1px solid var(--color-border);
+	overflow-wrap: break-word;
+	resize: none;
+	border-radius: var(--radius-small);
+
+	&:focus {
+		outline: 2px solid var(--color-border-focused);
+		outline-offset: -1px;
+	}
+}
+
+.button-controls {
+	display: flex;
+	gap: var(--spacing-3);
+}
+
+.error {
+	color: var(--color-text-danger);
+}

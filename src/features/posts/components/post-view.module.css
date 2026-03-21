@@ -31,4 +31,29 @@
 		font-weight: 400;
 		line-height: 21px;
 	}
+
+	> .post > .content > .body {
+		color: var(--color-text);
+		line-height: 1.4;
+		overflow-x: auto;
+		white-space: pre-wrap;
+		word-wrap: break-word;
+		word-break: break-all;
+		font-family: inherit;
+		font-size: var(--font-body);
+	}
+
+	> .post > .footer {
+		margin-top: var(--spacing-6);
+		display: flex;
+		justify-content: space-between;
+		font-size: var(--font-body);
+	}
+
+	> .post > .footer > .actions {
+		display: flex;
+		gap: var(--spacing-3);
+		justify-content: center;
+		align-items: center;
+	}
 }

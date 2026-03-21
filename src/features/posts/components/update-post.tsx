@@ -1,38 +1,40 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: See TanStack Form docs */
 import { Field } from "@base-ui/react/field";
 import { useForm } from "@tanstack/react-form";
-import React, { type SetStateAction, useState } from "react";
+import type React from "react";
+import type { SetStateAction } from "react";
+import { useState } from "react";
 import { z } from "zod";
 import { Button } from "@/components/ui/button/button";
-import type { Comment } from "@/types/api";
-import styles from "./update-comment.module.css";
+import styles from "@/features/comments/components/update-comment.module.css";
+import type { Post } from "@/types/api";
 
-const commentSchema = z.object({
-	content: z.string().trim().min(1, "Comment content is required"),
+const postSchema = z.object({
+	content: z.string().trim().min(1, "Post content is required"),
 });
 
-export type UpdateCommentProps = {
-	comment: Comment;
-	updateComment: (data: { content: string }) => void;
+export type UpdatePostProps = {
+	post: Post;
+	updatePost: (data: { content: string }) => void;
 	setIsEditing: React.Dispatch<SetStateAction<boolean>>;
 };
 
-export const UpdateComment = ({
-	comment,
-	updateComment,
+export const UpdatePost = ({
+	post,
+	updatePost,
 	setIsEditing,
-}: UpdateCommentProps) => {
-	const [commentText, _setCommentText] = useState(comment.content);
+}: UpdatePostProps) => {
+	const [postContent, _setPostContent] = useState(post.content);
 
 	const form = useForm({
 		defaultValues: {
-			content: commentText,
+			content: postContent,
 		},
 		validators: {
-			onChange: commentSchema,
+			onChange: postSchema,
 		},
 		onSubmit: async ({ value }) => {
-			updateComment(value);
+			updatePost(value);
 		},
 	});
 
@@ -90,7 +92,7 @@ export const UpdateComment = ({
 									onChange={(e) => field.handleChange(e.target.value)}
 									// biome-ignore lint/a11y/noAutofocus: <explanation>
 									autoFocus={true}
-									className={styles["edit-post"]}
+									className={styles["edit-comment"]}
 									onKeyDown={handleKeyPresses}
 								/>
 
