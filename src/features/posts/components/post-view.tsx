@@ -14,6 +14,8 @@ type EditActionProps = {
 	setIsEditing: React.Dispatch<SetStateAction<boolean>>;
 };
 
+type PostActions = ReturnType<typeof usePostActions>;
+
 const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
 	return (
 		<li>
@@ -31,6 +33,30 @@ const EditAction = ({ isEditing, setIsEditing }: EditActionProps) => {
 
 type PostActionsToolbarProps = {
 	children: React.ReactNode;
+};
+
+const DeleteAction = ({ actions }: { actions: PostActions }) => {
+	const { deletePost, isDeleting } = actions;
+
+	function handleDelete() {
+		if (confirm("Are you sure you want to delete this post?")) {
+			deletePost();
+		}
+	}
+
+	return (
+		<li>
+			<Button
+				type="button"
+				size="small"
+				variant="ghost"
+				disabled={isDeleting}
+				onClick={handleDelete}
+			>
+				Delete
+			</Button>
+		</li>
+	);
 };
 
 const PostActionsToolbar = ({ children }: PostActionsToolbarProps) => {
@@ -84,6 +110,7 @@ export const PostView = ({ postId }: PostViewProps) => {
 								setIsEditing={actions.setIsEditing}
 							/>
 						)}
+						{isUserOwnerOfPost && <DeleteAction actions={actions} />}
 					</PostActionsToolbar>
 				</footer>
 			</div>
