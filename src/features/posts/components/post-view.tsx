@@ -1,7 +1,10 @@
 import type React from "react";
 import type { SetStateAction } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button/button";
+import { ButtonLink } from "@/components/ui/button-link/button-link";
 import { CommentsList } from "@/features/comments/components/comments-list";
+import { CreateComment } from "@/features/comments/components/create-comment";
 import { usePost } from "@/features/posts/api/get-post";
 import { UpdatePost } from "@/features/posts/components/update-post";
 import { usePostActions } from "@/features/posts/hooks/use-post-actions";
@@ -59,6 +62,37 @@ const DeleteAction = ({ actions }: { actions: PostActions }) => {
 	);
 };
 
+type ReplyActionsProps = {
+	isReplying: boolean;
+	setIsReplying: React.Dispatch<SetStateAction<boolean>>;
+	isUserLoggedIn: boolean;
+};
+
+const ReplyAction = ({
+	isReplying,
+	setIsReplying,
+	isUserLoggedIn,
+}: ReplyActionsProps) => {
+	return (
+		<li>
+			{isUserLoggedIn ? (
+				<Button
+					type="button"
+					variant="ghost"
+					size="small"
+					onClick={() => setIsReplying(!isReplying)}
+				>
+					Reply
+				</Button>
+			) : (
+				<ButtonLink to={"/login"} variant="ghost" size="small">
+					Reply
+				</ButtonLink>
+			)}
+		</li>
+	);
+};
+
 const PostActionsToolbar = ({ children }: PostActionsToolbarProps) => {
 	return <menu className={styles.actions}>{children}</menu>;
 };
@@ -71,6 +105,8 @@ export const PostView = ({ postId }: PostViewProps) => {
 	const { data: post, isPending } = usePost({ postId });
 	const { data: session } = useSession();
 	const actions = usePostActions({ postId });
+	const [isReplying, setIsReplying] = useState(false);
+	const isUserLoggedIn = !!session?.user;
 
 	if (isPending) return <div>Loading...</div>;
 
@@ -102,6 +138,9 @@ export const PostView = ({ postId }: PostViewProps) => {
 						<pre className={styles.body}>{post.content}</pre>
 					)}
 				</div>
+
+				{isReplying && <CreateComment setIsReplying={setIsReplying} />}
+
 				<footer className={styles.footer}>
 					<PostActionsToolbar>
 						{isUserOwnerOfPost && (
@@ -111,6 +150,11 @@ export const PostView = ({ postId }: PostViewProps) => {
 							/>
 						)}
 						{isUserOwnerOfPost && <DeleteAction actions={actions} />}
+						<ReplyAction
+							isReplying={isReplying}
+							setIsReplying={setIsReplying}
+							isUserLoggedIn={isUserLoggedIn}
+						/>
 					</PostActionsToolbar>
 				</footer>
 			</div>
