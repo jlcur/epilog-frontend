@@ -1,0 +1,32 @@
+.field {
+	margin-bottom: var(--spacing-6);
+}
+
+.label {
+	font-weight: 600;
+	line-height: 1.25rem;
+	font-size: var(--font-size-small);
+}
+
+.textarea {
+	box-sizing: border-box;
+	padding: var(--spacing-3) var(--spacing-4);
+	margin: 0;
+	border: 2px solid var(--color-border);
+	border-radius: var(--radius-small);
+	min-height: 300px;
+	width: 100%;
+	font-family: inherit;
+	background-color: transparent;
+
+	&:focus {
+		outline: 2px solid var(--color-border-focused);
+		outline-offset: -1px;
+	}
+}
+
+.error {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: var(--color-text-danger);
+}
