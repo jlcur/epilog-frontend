@@ -1,6 +1,5 @@
 .posts-list {
 	background: var(--color-background-card);
-	margin-top: var(--spacing-9);
 	border-radius: var(--radius-large) var(--radius-large);
 }
 
@@ -12,4 +11,8 @@
 	gap: var(--spacing-4);
 	font-size: var(--font-body);
 	color: var(--color-text-subtle);
+}
+
+.create-post {
+	margin-bottom: var(--spacing-6);
 }

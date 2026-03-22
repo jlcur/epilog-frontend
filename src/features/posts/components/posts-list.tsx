@@ -1,5 +1,6 @@
 import { keepPreviousData } from "@tanstack/react-query";
 import { getRouteApi } from "@tanstack/react-router";
+import { PlusIcon } from "lucide-react";
 import { ButtonLink } from "@/components/ui/button-link/button-link";
 import { usePosts } from "@/features/posts/api/get-posts";
 import { PostCard } from "@/features/posts/components/post-card";
@@ -70,6 +71,11 @@ export const PostsList = () => {
 
 	return (
 		<>
+			<div className={styles["create-post"]}>
+				<ButtonLink to={"/posts/submit"} iconLeft={PlusIcon} variant="success">
+					Create new post
+				</ButtonLink>
+			</div>
 			<ul className={styles["posts-list"]}>
 				{posts.map((post: Post) => (
 					<li key={post.id}>
