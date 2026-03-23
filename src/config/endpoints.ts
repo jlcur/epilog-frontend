@@ -6,6 +6,7 @@ export const endpoints = {
 		delete: (commentId: string) => `/comments/${commentId}`,
 		create: (postId: string) => `/posts/${postId}/comments`,
 		update: (commentId: string) => `/comments/${commentId}`,
+		vote: (commentId: string) => `/comments/${commentId}/vote`,
 	},
 	posts: {
 		base: "/posts",
@@ -15,5 +16,6 @@ export const endpoints = {
 		create: "/posts/",
 		update: (postId: string) => `/posts/${postId}`,
 		comments: (postId: string) => `/posts/${postId}/comments`,
+		vote: (postId: string) => `/posts/${postId}/vote`,
 	},
 };
