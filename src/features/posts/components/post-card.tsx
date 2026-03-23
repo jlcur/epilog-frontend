@@ -1,4 +1,5 @@
 import { CustomLink } from "@/components/ui/link/link";
+import { Vote } from "@/features/votes/components/vote";
 import type { Post } from "@/types/api";
 import { convertDateToDistance } from "@/utils/date-utils/format-date";
 import styles from "./post-card.module.css";
@@ -12,6 +13,11 @@ export const PostCard = ({ post }: PostCardProps) => {
 
 	return (
 		<div className={styles["post-card"]}>
+			<Vote
+				postId={post.id}
+				score={post.vote_score}
+				userVote={post.user_vote}
+			/>
 			<div className={styles.post}>
 				<CustomLink
 					to={"/posts/$postId"}
