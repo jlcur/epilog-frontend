@@ -28,6 +28,8 @@ export type Post = {
 	updated_at: Date;
 	user_id: string;
 	user_name?: string;
+	vote_score: number;
+	user_vote: 1 | -1 | null;
 };
 
 export type PaginatedResponse<T> = {
