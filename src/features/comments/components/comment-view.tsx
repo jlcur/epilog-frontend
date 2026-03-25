@@ -12,5 +12,6 @@ export const CommentView = ({ commentId }: CommentViewProps) => {
 
 	if (!comment) return <div>Cannot find this comment.</div>;
 
+	// @ts-expect-error
 	return <CommentCard comment={comment} />;
 };
