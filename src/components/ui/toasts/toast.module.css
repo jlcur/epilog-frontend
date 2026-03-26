@@ -38,6 +38,7 @@
 		opacity 0.5s,
 		height 0.15s;
 
+	/* biome-ignore lint/correctness/noUnknownPseudoElement: false positive on nested &::after */
 	&::after {
 		content: "";
 		position: absolute;
