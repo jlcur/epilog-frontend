@@ -69,7 +69,6 @@ export const PostsList = () => {
 	const posts: Post[] = data?.data ?? [];
 
 	if (isPending) return <div>Loading...</div>;
-	if (posts.length === 0) return <div>No posts found.</div>;
 
 	return (
 		<>
@@ -84,18 +83,24 @@ export const PostsList = () => {
 					</ButtonLink>
 				</div>
 			)}
-			<ul className={styles["posts-list"]}>
-				{posts.map((post: Post) => (
-					<li key={post.id}>
-						<PostCard post={post} />
-					</li>
-				))}
-			</ul>
-			<PaginationControls
-				page={page}
-				limit={limit}
-				totalPages={data?.totalPages ?? 1}
-			/>
+			{posts.length === 0 ? (
+				<div>No posts found.</div>
+			) : (
+				<>
+					<ul className={styles["posts-list"]}>
+						{posts.map((post: Post) => (
+							<li key={post.id}>
+								<PostCard post={post} />
+							</li>
+						))}
+					</ul>
+					<PaginationControls
+						page={page}
+						limit={limit}
+						totalPages={data?.totalPages ?? 1}
+					/>
+				</>
+			)}
 		</>
 	);
 };
